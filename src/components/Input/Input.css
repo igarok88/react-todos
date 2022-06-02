@@ -1,0 +1,36 @@
+.todo__input-wrapper {
+  padding: 15px;
+  margin: 8px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #041955;
+}
+.todo__input-add-task-btn {
+  color: #eaecf1;
+  background-color: #183588;
+  border: none;
+  width: 30px;
+  height: 28px;
+  border-radius: 50%;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.todo__input {
+  color: #eaecf1;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 5px;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  border-bottom: 1px solid #46598c;
+}
+.todo__input::placeholder {
+  color: #46598c;
+}
