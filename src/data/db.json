@@ -1,0 +1,63 @@
+{
+  "lists": [
+    { "id": 1, "name": "Покупки", "colorId": 1 },
+    { "id": 2, "name": "Фронтенд", "colorId": 2 },
+    { "id": 3, "name": "Фильмы", "colorId": 3 },
+    { "id": 4, "name": "Книги", "colorId": 4 },
+    { "id": 5, "name": "Личное", "colorId": 5 }
+  ],
+  "tasks": [
+    { "id": 1, "listId": 1, "description": "Изучить HTML", "isChecked": true },
+    { "id": 2, "listId": 1, "description": "Изучить CSS", "isChecked": true },
+    { "id": 3, "listId": 2, "description": "Изучить JS", "isChecked": false },
+    {
+      "id": 4,
+      "listId": 3,
+      "description": "Изучить React",
+      "isChecked": false
+    },
+    {
+      "id": 5,
+      "listId": 3,
+      "description": "Изучить React Redux",
+      "isChecked": false
+    }
+  ],
+  "colors": [
+    {
+      "id": 1,
+      "name": "green",
+      "color": "#34AF86"
+    },
+    {
+      "id": 2,
+      "name": "gray",
+      "color": "#CFCFCF"
+    },
+    {
+      "id": 3,
+      "name": "pink",
+      "color": "#FCC3CC"
+    },
+    {
+      "id": 4,
+      "name": "olive",
+      "color": "#B1DEB7"
+    },
+    {
+      "id": 5,
+      "name": "purpure",
+      "color": "#C668FD"
+    },
+    {
+      "id": 6,
+      "name": "blue",
+      "color": "#62bdf6"
+    },
+    {
+      "id": 7,
+      "name": "orange",
+      "color": "#FF6E60"
+    }
+  ]
+}

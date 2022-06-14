@@ -1,0 +1,60 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  outline: none;
+  box-sizing: border-box;
+}
+body {
+  background-color: #97b5fe;
+}
+// @import "./normalize.css";
+
+//scrollbar
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: lighten($color: #227afe, $amount: 10);
+
+  border-radius: 10px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #227afe;
+}
+
+@font-face {
+  font-family: "San-Francisco-Display-Regular";
+  src: url("font/SanFranciscoDisplayRegular.woff") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Montserrat-Bold";
+  src: url("font/Montserrat-Bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Roboto-Regular";
+  src: url("font/Roboto-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+.App {
+  font-family: "San-Francisco-Display-Regular";
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  // margin: 20px;
+  // border-radius: 20px;
+  overflow: hidden;
+}

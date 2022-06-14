@@ -1,0 +1,43 @@
+.todo {
+  &__input-wrapper {
+    padding: 15px;
+    margin: 8px 15px;
+    margin-bottom: 35px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__input-add-task-btn {
+    cursor: pointer;
+    color: darken($color: #eaecf1, $amount: 30);
+    transform: rotate(45deg);
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    transition: color, 0.5s ease;
+    &:hover {
+      color: #eaecf1;
+    }
+  }
+  &__input {
+    font-size: 18px;
+    color: #eaecf1;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 5px;
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    font-size: 16px;
+    // border-bottom: 1px solid #eaecf1;
+  }
+  &__input::placeholder {
+    color: darken($color: #eaecf1, $amount: 30);
+  }
+}

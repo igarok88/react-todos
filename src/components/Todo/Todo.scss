@@ -1,0 +1,16 @@
+.todo {
+  min-width: 550px;
+  padding: 35px;
+  overflow: auto;
+  background-color: #3450a1;
+  // border-radius: 20px;
+  // margin: 10px;
+  &__category-title {
+    color: #fff;
+    padding: 15px;
+    margin: 15px;
+    margin-bottom: 25px;
+    font-size: 32px;
+    font-family: "Montserrat-Bold", serif;
+  }
+}

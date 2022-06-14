@@ -1,6 +1,7 @@
-import "./Task.css";
 import { ImCross } from "react-icons/im";
 import { BsCheck2 } from "react-icons/bs";
+
+import "./Task.scss";
 
 export default function Task({
   id,

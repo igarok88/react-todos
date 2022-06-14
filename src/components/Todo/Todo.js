@@ -1,39 +1,11 @@
 import { useState, useEffect } from "react";
-import Input from "../Input/Input";
-import Task from "../Task/Task";
-import "./Todo.css";
+import AddTask from "./AddTask/AddTask";
+import Task from "./Task/Task";
 
-export default function Todo() {
-  const updateLocalStorage = (name, data) => {
-    localStorage.setItem(name, JSON.stringify(data));
-  };
-  let data = JSON.parse(localStorage.getItem("todoList"));
-  if (!data) {
-    data = [];
-  }
-  //   const data = [
-  //     {
-  //       id: 1,
-  //       description: "first",
-  //       isChecked: true,
-  //     },
-  //     {
-  //       id: 2,
-  //       description: "two",
-  //       isChecked: false,
-  //     },
-  //     {
-  //       id: 3,
-  //       description: "third",
-  //       isChecked: false,
-  //     },
-  //   ];
+import "./Todo.scss";
 
-  const [todoList, setTodoList] = useState(data);
-
-  useEffect(() => {
-    updateLocalStorage("todoList", todoList);
-  }, [todoList]);
+export default function Todo({ tasks, categoryList, listId }) {
+  const [todoList, setTodoList] = useState(tasks);
 
   const checkedTask = (id) => {
     const copy = [...todoList];
@@ -49,20 +21,68 @@ export default function Todo() {
   };
 
   return (
-    <>
-      <div className="todo__wrapper">
-        <Input setTodoList={setTodoList} />
-        {todoList.map((todo) => (
-          <Task
-            removeTask={removeTask}
-            checkedTask={checkedTask}
-            key={todo.id}
-            id={todo.id}
-            description={todo.description}
-            isChecked={todo.isChecked}
-          />
-        ))}
-      </div>
-    </>
+    <div className="todo">
+      {"all" === listId ? (
+        <>
+          {categoryList.map((category) => {
+            return (
+              <div key={category.id}>
+                <h2 className={`todo__category-title color--${category.color}`}>
+                  {category.name}
+                </h2>
+                {todoList.map((todo) => {
+                  return (
+                    category.id === todo.listId && (
+                      <Task
+                        removeTask={removeTask}
+                        checkedTask={checkedTask}
+                        key={todo.id}
+                        id={todo.id}
+                        description={todo.description}
+                        isChecked={todo.isChecked}
+                      />
+                    )
+                  );
+                })}{" "}
+                <AddTask setTodoList={setTodoList} listId={category.id} />
+              </div>
+            );
+          })}
+        </>
+      ) : (
+        <>
+          {categoryList.map((category) => {
+            console.log(categoryList);
+            return (
+              category.id === listId && (
+                <h2
+                  key={category.id}
+                  className={`todo__category-title color--${category.color}`}
+                >
+                  {category.name}
+                </h2>
+              )
+            );
+          })}
+          {todoList.map((todo) => {
+            return (
+              <>
+                {todo.listId === listId && (
+                  <Task
+                    removeTask={removeTask}
+                    checkedTask={checkedTask}
+                    key={todo.id}
+                    id={todo.id}
+                    description={todo.description}
+                    isChecked={todo.isChecked}
+                  />
+                )}
+              </>
+            );
+          })}
+          <AddTask setTodoList={setTodoList} listId={listId} />
+        </>
+      )}
+    </div>
   );
 }

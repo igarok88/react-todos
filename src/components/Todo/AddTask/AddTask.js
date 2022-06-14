@@ -1,16 +1,19 @@
 import { useState } from "react";
-import "./Input.css";
+import { MdOutlineClose } from "react-icons/md";
 
-export default function Input({ setTodoList }) {
+import "./AddTask.scss";
+
+export default function AddTask({ setTodoList, listId }) {
   const [description, setDescription] = useState("");
   const addTask = (description) => {
     setTodoList((prev) => [
+      ...prev,
       {
         id: Math.random(),
+        listId,
         description,
         isChecked: false,
       },
-      ...prev,
     ]);
     setDescription("");
   };
@@ -21,12 +24,12 @@ export default function Input({ setTodoList }) {
         className="todo__input-add-task-btn"
         onClick={() => addTask(description)}
       >
-        +
+        <MdOutlineClose />
       </button>
       <input
         className="todo__input"
         type="text"
-        placeholder="add task"
+        placeholder="New task"
         onChange={(e) => setDescription(e.target.value)}
         value={description}
         onKeyPress={(e) => e.key === "Enter" && addTask(description)}

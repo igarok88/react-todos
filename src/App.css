@@ -1,9 +1,0 @@
-@font-face {
-  font-family: "San-Francisco-Display-Regular";
-  src: url("font/SanFranciscoDisplayRegular.woff") format("truetype");
-  font-style: normal;
-  font-weight: normal;
-}
-.App {
-  font-family: "San-Francisco-Display-Regular";
-}
