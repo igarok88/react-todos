@@ -3,10 +3,15 @@ import { useState } from "react";
 import "./AddCategories.scss";
 import { MdOutlineClose } from "react-icons/md";
 
-export default function AddCategories({ colors, categoryList, addList }) {
+export default function AddCategories({
+  colors,
+  categoryList,
+  addList,
+  inputValue,
+  setInputValue,
+}) {
   const [showPopup, setShowPopup] = useState(false);
   const [colorId, setColorId] = useState(1);
-  const [inputValue, setinputValue] = useState("");
 
   const addСategory = () => {
     if (inputValue) {
@@ -21,7 +26,7 @@ export default function AddCategories({ colors, categoryList, addList }) {
     }
   };
   const closePopup = () => {
-    setinputValue("");
+    setInputValue("");
     setColorId(1);
     setShowPopup(false);
   };
@@ -42,7 +47,7 @@ export default function AddCategories({ colors, categoryList, addList }) {
           <>
             <div className="categories__add-popup-window">
               <input
-                onChange={(e) => setinputValue(e.target.value)}
+                onChange={(e) => setInputValue(e.target.value)}
                 value={inputValue}
                 type="text"
                 placeholder="Name categories"

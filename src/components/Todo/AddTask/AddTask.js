@@ -6,16 +6,18 @@ import "./AddTask.scss";
 export default function AddTask({ setTodoList, listId }) {
   const [description, setDescription] = useState("");
   const addTask = (description) => {
-    setTodoList((prev) => [
-      ...prev,
-      {
-        id: Math.random(),
-        listId,
-        description,
-        isChecked: false,
-      },
-    ]);
-    setDescription("");
+    if (description) {
+      setTodoList((prev) => [
+        ...prev,
+        {
+          id: Math.random(),
+          listId,
+          description,
+          isChecked: false,
+        },
+      ]);
+      setDescription("");
+    }
   };
 
   return (

@@ -5,12 +5,46 @@
   background-color: #3450a1;
   // border-radius: 20px;
   // margin: 10px;
-  &__category-title {
-    color: #fff;
+  &__category-title-wrapper {
+    font-size: 22px;
     padding: 15px;
     margin: 15px;
+    color: #eaecf1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__category-title {
     margin-bottom: 25px;
     font-size: 32px;
     font-family: "Montserrat-Bold", serif;
+  }
+  &__category-btns {
+    display: flex;
+    color: #183588;
+  }
+  &__category-edit {
+    cursor: pointer;
+    margin: 20px;
+    margin-top: 0px;
+    transition: color 0.7s ease;
+    &:hover {
+      color: #eaecf1;
+    }
+  }
+  &__category-delete-btn {
+    transition: color 0.7s ease;
+    cursor: pointer;
+    &:hover {
+      color: #eaecf1;
+    }
+  }
+  &__no-tasks {
+    font-size: 32px;
+    padding: 15px;
+    margin: 15px;
+    color: #eaecf1;
+    font-family: "Montserrat-Bold", serif;
+    // text-align: center;
   }
 }

@@ -6,11 +6,14 @@ import AddCategories from "./AddCategories/AddCategories";
 import "./Categories.scss";
 
 export default function Categories({
+  todoList,
+  categoryList,
+  setCategoryList,
   colors,
   listId,
   setListId,
-  categoryList,
-  setCategoryList,
+  inputValue,
+  setInputValue,
 }) {
   const addList = (obj) => {
     setCategoryList(obj);
@@ -18,20 +21,31 @@ export default function Categories({
 
   return (
     <div className="categories">
-      <CategoriesItem
-        id={"all"}
-        name={"Все задачи"}
-        setListId={setListId}
-        activeClass={"all" === listId ? "active" : null}
-        icon={<RiBarChartHorizontalLine />}
+      {" "}
+      <AddCategories
+        addList={addList}
+        colors={colors}
+        categoryList={categoryList}
+        inputValue={inputValue}
+        setInputValue={setInputValue}
       />
-
+      {categoryList && categoryList.length > 0 && (
+        <CategoriesItem
+          todoList={todoList}
+          id={"all"}
+          name={"Все задачи"}
+          setListId={setListId}
+          activeClass={"all" === listId ? "active" : null}
+          icon={<RiBarChartHorizontalLine />}
+        />
+      )}
       {categoryList.map((list) => {
         list.color = colors.filter(
           (color) => color.id === list.colorId
         )[0].name;
         return (
           <CategoriesItem
+            todoList={todoList}
             key={list.id}
             id={list.id}
             name={list.name}
@@ -41,11 +55,6 @@ export default function Categories({
           />
         );
       })}
-      <AddCategories
-        addList={addList}
-        colors={colors}
-        categoryList={categoryList}
-      />
     </div>
   );
 }

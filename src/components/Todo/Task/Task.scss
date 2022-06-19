@@ -40,7 +40,7 @@
     cursor: pointer;
     color: #183588;
     margin: 5px;
-    transition: color, 0.7s ease;
+    transition: color 0.7s ease;
     &:hover {
       color: lighten($color: #183588, $amount: 70);
     }

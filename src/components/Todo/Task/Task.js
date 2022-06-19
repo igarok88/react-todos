@@ -1,3 +1,5 @@
+import { useRef } from "react";
+
 import { ImCross } from "react-icons/im";
 import { BsCheck2 } from "react-icons/bs";
 
@@ -9,11 +11,27 @@ export default function Task({
   isChecked,
   checkedTask,
   removeTask,
+  todoList,
+  setTodoList,
 }) {
+  console.log(id);
+  const taskDescription = useRef(null);
+
   const todoTaskClasses = ["todo__task"];
   if (isChecked) {
     todoTaskClasses.push("checked");
   }
+
+  const editTaskDescription = (taskDomElement) => {
+    const copy = [...todoList];
+    copy.map((todo) => {
+      if (todo.id === id) {
+        todo.description = taskDomElement.innerText;
+      }
+      return todo;
+    });
+    setTodoList(copy);
+  };
 
   return (
     <>
@@ -21,7 +39,16 @@ export default function Task({
         <div className="todo__checkbox" onClick={() => checkedTask(id)}>
           {isChecked && <BsCheck2 />}
         </div>
-        <div className={todoTaskClasses.join(" ")}>{description}</div>
+        <div
+          id={id}
+          contentEditable
+          suppressContentEditableWarning={true}
+          ref={taskDescription}
+          onBlur={() => editTaskDescription(taskDescription.current)}
+          className={todoTaskClasses.join(" ")}
+        >
+          {description}
+        </div>
         <ImCross
           className="todo__delete-task-btn"
           onClick={() => removeTask(id)}
