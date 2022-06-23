@@ -1,0 +1,32 @@
+.categories {
+  &__auth-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+  &__auth-sign {
+    position: absolute;
+    bottom: 0;
+    padding: 15px;
+    margin: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__auth-title {
+    cursor: pointer;
+  }
+  &__auth-icon {
+    margin: 15px;
+    display: flex;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+  &__auth-avatar {
+    margin: 0 15px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+}

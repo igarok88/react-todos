@@ -14,7 +14,6 @@ export default function Task({
   todoList,
   setTodoList,
 }) {
-  console.log(id);
   const taskDescription = useRef(null);
 
   const todoTaskClasses = ["todo__task"];

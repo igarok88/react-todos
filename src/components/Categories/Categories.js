@@ -2,11 +2,13 @@ import { RiBarChartHorizontalLine } from "react-icons/ri";
 
 import CategoriesItem from "./CategoriesItem/CategoriesItem";
 import AddCategories from "./AddCategories/AddCategories";
+import Auth from "../Auth/Auth";
 
 import "./Categories.scss";
 
 export default function Categories({
   todoList,
+  setTodoList,
   categoryList,
   setCategoryList,
   colors,
@@ -21,7 +23,6 @@ export default function Categories({
 
   return (
     <div className="categories">
-      {" "}
       <AddCategories
         addList={addList}
         colors={colors}
@@ -29,7 +30,7 @@ export default function Categories({
         inputValue={inputValue}
         setInputValue={setInputValue}
       />
-      {categoryList && categoryList.length > 0 && (
+      {categoryList && categoryList.length > 1 && (
         <CategoriesItem
           todoList={todoList}
           id={"all"}
@@ -55,6 +56,12 @@ export default function Categories({
           />
         );
       })}
+      <Auth
+        todoList={todoList}
+        setTodoList={setTodoList}
+        categoryList={categoryList}
+        setCategoryList={setCategoryList}
+      />
     </div>
   );
 }

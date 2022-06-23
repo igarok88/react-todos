@@ -15,7 +15,7 @@ export default function Todo({
   listId,
   setListId,
 }) {
-  const categoryNameRef = useRef(null);
+  const categoryNameRef = useRef([]);
 
   const checkedTask = (id) => {
     const copy = [...todoList];
@@ -60,15 +60,32 @@ export default function Todo({
         <>
           {"all" === listId ? (
             <>
-              {categoryList.map((category) => {
+              {categoryList.map((category, index) => {
                 return (
                   <div key={category.id}>
                     <div className="todo__category-title-wrapper">
                       <h2
+                        id={category.id}
+                        ref={(el) => (categoryNameRef.current[index] = el)}
+                        onBlur={() =>
+                          editCategory(categoryNameRef.current[index])
+                        }
+                        contentEditable
+                        suppressContentEditableWarning={true}
                         className={`todo__category-title color--${category.color}`}
                       >
                         {category.name}
                       </h2>
+                      <div className="todo__category-btns">
+                        <VscEdit
+                          className="todo__category-edit"
+                          onClick={() => categoryNameRef.current[index].focus()}
+                        />
+                        <ImCross
+                          className="todo__category-delete-btn"
+                          onClick={() => deleteCategory(category.id)}
+                        />
+                      </div>
                     </div>
                     {todoList.map((todo) => {
                       return (
@@ -93,7 +110,7 @@ export default function Todo({
             </>
           ) : (
             <>
-              {categoryList.map((category) => {
+              {categoryList.map((category, index) => {
                 return (
                   category.id === listId && (
                     <div
@@ -102,8 +119,10 @@ export default function Todo({
                     >
                       <h2
                         id={category.id}
-                        ref={categoryNameRef}
-                        onBlur={() => editCategory(categoryNameRef.current)}
+                        ref={(el) => (categoryNameRef.current[index] = el)}
+                        onBlur={() =>
+                          editCategory(categoryNameRef.current[index])
+                        }
                         contentEditable
                         suppressContentEditableWarning={true}
                         key={category.id}
@@ -114,7 +133,7 @@ export default function Todo({
                       <div className="todo__category-btns">
                         <VscEdit
                           className="todo__category-edit"
-                          onClick={() => categoryNameRef.current.focus()}
+                          onClick={() => categoryNameRef.current[index].focus()}
                         />
                         <ImCross
                           className="todo__category-delete-btn"

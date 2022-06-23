@@ -12,10 +12,12 @@ export default function App() {
   const [categoryList, setCategoryList] = useState(DB.lists);
   const [todoList, setTodoList] = useState(DB.tasks);
   const [inputValue, setInputValue] = useState("");
+
   return (
     <div className="App">
       <Categories
         todoList={todoList}
+        setTodoList={setTodoList}
         categoryList={categoryList}
         setCategoryList={setCategoryList}
         colors={DB.colors}
