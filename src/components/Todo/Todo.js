@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { VscEdit } from "react-icons/vsc";
 import { ImCross } from "react-icons/im";
 
+import { isEqual } from "../../func/func";
 import AddTask from "./AddTask/AddTask";
 import Task from "./Task/Task";
 import "./Todo.scss";
@@ -31,14 +32,17 @@ export default function Todo({
   };
 
   const editCategory = (categoryDomElement) => {
-    const copy = [...categoryList];
+    const copy = JSON.parse(JSON.stringify(categoryList));
     copy.map((category) => {
       if (category.id === +categoryDomElement.id) {
         category.name = categoryDomElement.innerText;
       }
       return category;
     });
-    setCategoryList(copy);
+
+    if (!isEqual(categoryList, copy)) {
+      setCategoryList(copy);
+    }
   };
 
   const deleteCategory = (id) => {

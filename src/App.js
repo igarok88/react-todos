@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Todo from "./components/Todo/Todo";
 import Categories from "./components/Categories/Categories";
@@ -13,6 +13,14 @@ export default function App() {
   const [todoList, setTodoList] = useState(DB.tasks);
   const [inputValue, setInputValue] = useState("");
 
+  const [editDate, setEditDate] = useState(null);
+
+  useEffect(() => {
+    const editDate = +new Date();
+    setEditDate(editDate);
+    console.log("change edit Date", editDate);
+  }, [todoList, categoryList]);
+
   return (
     <div className="App">
       <Categories
@@ -20,6 +28,7 @@ export default function App() {
         setTodoList={setTodoList}
         categoryList={categoryList}
         setCategoryList={setCategoryList}
+        editDate={editDate}
         colors={DB.colors}
         listId={listId}
         setListId={setListId}

@@ -1,14 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import { auth, db } from "../../firebase/firebaseConfig";
 import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  doc,
-  deleteDoc,
-} from "firebase/firestore";
+
+import { ref, set, child, get } from "firebase/database";
+
 import { MdOutlineLogout, MdOutlineLogin } from "react-icons/md";
 import { VscSync } from "react-icons/vsc";
 
@@ -19,20 +15,18 @@ export default function Auth({
   setTodoList,
   categoryList,
   setCategoryList,
+  editDate,
 }) {
-  // console.log(todoList);
-  // console.log(categoryList);
-  const [login, setLogin] = useState(false);
-  const [userData, setUserData] = useState(null);
-  const [todoListFromServer, setTodoListFromServer] = useState(null);
-  const [categoryListFromServer, setCategoryListFromServer] = useState(null);
-  const [forServerId, setForServerId] = useState("");
-  const [fromServerId, setFromServerId] = useState("");
+  const [login, setLogin] = useState(true);
+  const [userData, setUserData] = useState({
+    uid: "IXI9anM0Zyaz6U03RQumTYvDxUy1",
+    photoURL:
+      "https://lh3.googleusercontent.com/a-/AOh14GgTA0Pp8G24xR5NJgREVFWCruKre_AWqMHeRlqjDt4=s96-c",
+  });
 
-  console.log("forServerId", forServerId);
-  console.log("fromServerId", fromServerId);
-  console.log("todoListFromServer", todoListFromServer);
-  console.log("categoryListFromServer", categoryListFromServer);
+  const [dataFromServer, setDataFromServer] = useState({});
+
+  console.log("dataFromServer", dataFromServer);
 
   const signInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
@@ -58,92 +52,65 @@ export default function Auth({
       });
   };
 
-  const isEqual = (object1, object2) => {
-    if (object1 && object2) {
-    } else {
-      return false;
-    }
+  const readUserData = async () => {
+    console.log("readUserData");
+    //track change data
+    // const starCountRef = ref(db, userData.uid);
+    // onValue(starCountRef, (snapshot) => {
+    //   const data = snapshot.val();
+    //   setDataFromServer(data);
+    // });
 
-    const props1 = Object.getOwnPropertyNames(object1);
-    const props2 = Object.getOwnPropertyNames(object2);
-
-    if (props1.length !== props2.length) {
-      return false;
-    }
-
-    for (let i = 0; i < props1.length; i += 1) {
-      const prop = props1[i];
-      const bothAreObjects =
-        typeof object1[prop] === "object" && typeof object2[prop] === "object";
-
-      if (
-        (!bothAreObjects && object1[prop] !== object2[prop]) ||
-        (bothAreObjects && !isEqual(object1[prop], object2[prop]))
-      ) {
-        return false;
-      }
-    }
-
-    return true;
-  };
-
-  const getDataFromFirebase = async () => {
-    const querySnapshot = await getDocs(collection(db, userData.uid));
-
-    querySnapshot.forEach((document) => {
-      const {
-        todoList: todoListFromServer,
-        categoryList: categoryListFromServer,
-      } = document.data();
-
-      setTodoListFromServer(todoListFromServer);
-      setCategoryListFromServer(categoryListFromServer);
-      setFromServerId(document.id);
-    });
-  };
-
-  const addData = async () => {
-    console.log("addData");
-    try {
-      const docRef = await addDoc(collection(db, userData.uid), {
-        todoList,
-        categoryList,
+    //get data once
+    const dbRef = ref(db);
+    await get(child(dbRef, userData.uid))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          setDataFromServer(data);
+          console.log("readUserData", data);
+          console.log("read done");
+          compareValues(editDate, data);
+        } else {
+          console.log("No data available");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
       });
-      // console.log("Document written with ID: ", docRef.id);
-      setForServerId(docRef.id);
-      setFromServerId(docRef.id);
-    } catch (e) {
-      setForServerId("");
-      console.error("Error adding document: ", e);
-    }
+    return;
   };
 
-  const deleteData = async () => {
-    console.log("deleteData", fromServerId, forServerId);
-    await deleteDoc(doc(db, userData.uid, forServerId));
+  const writeUserData = () => {
+    console.log("writeUserData");
+    set(ref(db, userData.uid), {
+      todoList,
+      categoryList,
+      date: editDate,
+    });
+    console.log("write done");
   };
 
-  const sendData = async () => {
-    getDataFromFirebase();
+  const compareValues = (editDate, dataFromServer) => {
+    console.log("editDate APP", editDate);
+    console.log("editDate SERVER", dataFromServer.date);
 
-    const todoListIsEqual = isEqual(todoListFromServer, todoList);
-    const categoryListIsEqual = isEqual(categoryListFromServer, categoryList);
+    if (dataFromServer.date > editDate) {
+      console.log("NEED DOWNLOAD");
 
-    if (todoListIsEqual && categoryListIsEqual) {
-      console.log("no need sync");
-      setForServerId(fromServerId);
-      console.log("setServerId for local", fromServerId);
+      setTodoList(dataFromServer.todoList);
+      setCategoryList(dataFromServer.categoryList);
+    } else if (dataFromServer.date === editDate) {
+      console.log("ALL OK");
     } else {
-      console.log("need sync");
+      console.log("NEED UPLOAD");
 
-      deleteData();
-
-      addData();
+      writeUserData();
     }
   };
 
-  const syncData = () => {
-    sendData();
+  const syncData = async () => {
+    await readUserData();
   };
 
   return (

@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { ImCross } from "react-icons/im";
 import { BsCheck2 } from "react-icons/bs";
 
+import { isEqual } from "../../../func/func";
 import "./Task.scss";
 
 export default function Task({
@@ -22,14 +23,17 @@ export default function Task({
   }
 
   const editTaskDescription = (taskDomElement) => {
-    const copy = [...todoList];
+    const copy = JSON.parse(JSON.stringify(todoList));
     copy.map((todo) => {
       if (todo.id === id) {
         todo.description = taskDomElement.innerText;
       }
       return todo;
     });
-    setTodoList(copy);
+
+    if (!isEqual(todoList, copy)) {
+      setTodoList(copy);
+    }
   };
 
   return (

@@ -11,6 +11,7 @@ export default function Categories({
   setTodoList,
   categoryList,
   setCategoryList,
+  editDate,
   colors,
   listId,
   setListId,
@@ -61,6 +62,7 @@ export default function Categories({
         setTodoList={setTodoList}
         categoryList={categoryList}
         setCategoryList={setCategoryList}
+        editDate={editDate}
       />
     </div>
   );
