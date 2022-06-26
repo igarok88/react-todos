@@ -92,6 +92,11 @@ export default function Auth({
     console.log("write done");
   };
 
+  const findAndReplaceDataFromServer = (localData, serverData) => {
+    console.log("localData", localData);
+    console.log("serverData", serverData);
+  };
+
   const compareValues = (editDate, dataFromServer) => {
     console.log("editDate APP", editDate);
     console.log("editDate SERVER", dataFromServer.date);
@@ -99,6 +104,7 @@ export default function Auth({
     if (dataFromServer.date > editDate) {
       console.log("NEED DOWNLOAD");
 
+      // findAndReplaceDataFromServer(todoList, dataFromServer.todoList);
       setTodoList(dataFromServer.todoList);
       setCategoryList(dataFromServer.categoryList);
     } else if (dataFromServer.date === editDate) {

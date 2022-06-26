@@ -28,14 +28,16 @@ export default function Task({
     const copy = JSON.parse(JSON.stringify(todoList));
     copy.map((todo) => {
       if (todo.id === id) {
+        setEditDate(+new Date());
+
         todo.description = taskDomElement.innerText;
+        todo.date = editDate;
       }
       return todo;
     });
 
     if (!isEqual(todoList, copy)) {
       setTodoList(copy);
-      setEditDate(+new Date());
     }
   };
 

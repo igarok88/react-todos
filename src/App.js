@@ -15,6 +15,9 @@ export default function App() {
 
   const [editDate, setEditDate] = useState(null);
 
+  console.log("categoryList", categoryList);
+  console.log("todoList", todoList);
+
   useEffect(() => {
     const editDate = +new Date();
     setEditDate(editDate);

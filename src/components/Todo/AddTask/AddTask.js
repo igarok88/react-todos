@@ -3,10 +3,16 @@ import { MdOutlineClose } from "react-icons/md";
 
 import "./AddTask.scss";
 
-export default function AddTask({ setTodoList, listId, setEditDate }) {
+export default function AddTask({
+  setTodoList,
+  listId,
+  editDate,
+  setEditDate,
+}) {
   const [description, setDescription] = useState("");
   const addTask = (description) => {
     if (description) {
+      setEditDate(+new Date());
       setTodoList((prev) => [
         ...prev,
         {
@@ -14,10 +20,10 @@ export default function AddTask({ setTodoList, listId, setEditDate }) {
           listId,
           description,
           isChecked: false,
+          date: editDate,
         },
       ]);
       setDescription("");
-      setEditDate(+new Date());
     }
   };
 

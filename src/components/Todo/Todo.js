@@ -24,8 +24,9 @@ export default function Todo({
     const copy = [...todoList];
     const current = copy.find((todo) => todo.id === id);
     current.isChecked = !current.isChecked;
-    setTodoList(copy);
     setEditDate(+new Date());
+    current.date = editDate;
+    setTodoList(copy);
   };
 
   const removeTask = (id) => {
@@ -39,14 +40,15 @@ export default function Todo({
     const copy = JSON.parse(JSON.stringify(categoryList));
     copy.map((category) => {
       if (category.id === +categoryDomElement.id) {
+        setEditDate(+new Date());
         category.name = categoryDomElement.innerText;
+        category.date = editDate;
       }
       return category;
     });
 
     if (!isEqual(categoryList, copy)) {
       setCategoryList(copy);
-      setEditDate(+new Date());
     }
   };
 
