@@ -14,6 +14,8 @@ export default function Task({
   removeTask,
   todoList,
   setTodoList,
+  editDate,
+  setEditDate,
 }) {
   const taskDescription = useRef(null);
 
@@ -33,6 +35,7 @@ export default function Task({
 
     if (!isEqual(todoList, copy)) {
       setTodoList(copy);
+      setEditDate(+new Date());
     }
   };
 

@@ -12,6 +12,7 @@ export default function Categories({
   categoryList,
   setCategoryList,
   editDate,
+  setEditDate,
   colors,
   listId,
   setListId,
@@ -20,6 +21,7 @@ export default function Categories({
 }) {
   const addList = (obj) => {
     setCategoryList(obj);
+    setEditDate(+new Date());
   };
 
   return (
@@ -63,6 +65,7 @@ export default function Categories({
         categoryList={categoryList}
         setCategoryList={setCategoryList}
         editDate={editDate}
+        setEditDate={setEditDate}
       />
     </div>
   );

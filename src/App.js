@@ -29,6 +29,7 @@ export default function App() {
         categoryList={categoryList}
         setCategoryList={setCategoryList}
         editDate={editDate}
+        setEditDate={setEditDate}
         colors={DB.colors}
         listId={listId}
         setListId={setListId}
@@ -40,6 +41,8 @@ export default function App() {
         setTodoList={setTodoList}
         categoryList={categoryList}
         setCategoryList={setCategoryList}
+        editDate={editDate}
+        setEditDate={setEditDate}
         listId={listId}
         setListId={setListId}
       />

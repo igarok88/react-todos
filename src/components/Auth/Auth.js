@@ -16,6 +16,7 @@ export default function Auth({
   categoryList,
   setCategoryList,
   editDate,
+  setEditDate,
 }) {
   const [login, setLogin] = useState(true);
   const [userData, setUserData] = useState({

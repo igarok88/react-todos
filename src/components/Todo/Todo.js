@@ -15,6 +15,8 @@ export default function Todo({
   setCategoryList,
   listId,
   setListId,
+  editDate,
+  setEditDate,
 }) {
   const categoryNameRef = useRef([]);
 
@@ -23,12 +25,14 @@ export default function Todo({
     const current = copy.find((todo) => todo.id === id);
     current.isChecked = !current.isChecked;
     setTodoList(copy);
+    setEditDate(+new Date());
   };
 
   const removeTask = (id) => {
     const copy = [...todoList];
     const newTodoList = copy.filter((todo) => todo.id !== id);
     setTodoList(newTodoList);
+    setEditDate(+new Date());
   };
 
   const editCategory = (categoryDomElement) => {
@@ -42,6 +46,7 @@ export default function Todo({
 
     if (!isEqual(categoryList, copy)) {
       setCategoryList(copy);
+      setEditDate(+new Date());
     }
   };
 
@@ -56,6 +61,7 @@ export default function Todo({
     );
     setCategoryList(newCategoryList);
     setListId("all");
+    setEditDate(+new Date());
   };
 
   return (
@@ -103,11 +109,18 @@ export default function Todo({
                             isChecked={todo.isChecked}
                             todoList={todoList}
                             setTodoList={setTodoList}
+                            editDate={editDate}
+                            setEditDate={setEditDate}
                           />
                         )
                       );
                     })}
-                    <AddTask setTodoList={setTodoList} listId={category.id} />
+                    <AddTask
+                      setTodoList={setTodoList}
+                      listId={category.id}
+                      editDate={editDate}
+                      setEditDate={setEditDate}
+                    />
                   </div>
                 );
               })}
@@ -161,12 +174,19 @@ export default function Todo({
                         isChecked={todo.isChecked}
                         todoList={todoList}
                         setTodoList={setTodoList}
+                        editDate={editDate}
+                        setEditDate={setEditDate}
                       />
                     )}
                   </div>
                 );
               })}
-              <AddTask setTodoList={setTodoList} listId={listId} />
+              <AddTask
+                setTodoList={setTodoList}
+                listId={listId}
+                editDate={editDate}
+                setEditDate={setEditDate}
+              />
             </>
           )}
         </>
