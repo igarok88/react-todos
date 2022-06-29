@@ -13,6 +13,8 @@ export default function Todo({
   setTodoList,
   categoryList,
   setCategoryList,
+  deletedTodoList,
+  setDeletedTodoList,
   listId,
   setListId,
   editDate,
@@ -23,6 +25,7 @@ export default function Todo({
   const checkedTask = (id) => {
     const copy = [...todoList];
     const current = copy.find((todo) => todo.id === id);
+
     current.isChecked = !current.isChecked;
     setEditDate(+new Date());
     current.date = editDate;
@@ -32,6 +35,9 @@ export default function Todo({
   const removeTask = (id) => {
     const copy = [...todoList];
     const newTodoList = copy.filter((todo) => todo.id !== id);
+    const deletedTask = copy.find((todo) => todo.id === id);
+    const copyDelTodoList = [...deletedTodoList, deletedTask];
+    setDeletedTodoList(copyDelTodoList);
     setTodoList(newTodoList);
     setEditDate(+new Date());
   };

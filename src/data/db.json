@@ -7,14 +7,33 @@
     { "id": 5, "name": "Личное", "colorId": 5 }
   ],
   "tasks": [
-    { "id": 1, "listId": 1, "description": "Изучить HTML", "isChecked": true },
-    { "id": 2, "listId": 1, "description": "Изучить CSS", "isChecked": true },
-    { "id": 3, "listId": 2, "description": "Изучить JS", "isChecked": false },
+    {
+      "id": 1,
+      "listId": 1,
+      "description": "Изучить HTML",
+      "isChecked": true,
+      "date": 1
+    },
+    {
+      "id": 2,
+      "listId": 1,
+      "description": "Изучить CSS",
+      "isChecked": true,
+      "date": 2
+    },
+    {
+      "id": 3,
+      "listId": 2,
+      "description": "Изучить JS",
+      "isChecked": false,
+      "date": 100000000000000000000000000
+    },
     {
       "id": 4,
       "listId": 3,
       "description": "Изучить React",
-      "isChecked": false
+      "isChecked": false,
+      "date": 100000000000000000000000001
     },
     {
       "id": 5,

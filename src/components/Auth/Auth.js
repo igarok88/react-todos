@@ -92,19 +92,66 @@ export default function Auth({
     console.log("write done");
   };
 
-  const findAndReplaceDataFromServer = (localData, serverData) => {
-    console.log("localData", localData);
-    console.log("serverData", serverData);
+  const findAndReplaceData = (localData, serverData) => {
+    console.log("localData", JSON.parse(JSON.stringify(localData)));
+    console.log("serverData", JSON.parse(JSON.stringify(serverData)));
+
+    let newArr = [];
+
+    // let newArr = [];
+
+    // localData.forEach((todoLocal, index) => {
+    //   serverData.forEach((todoServer) => {
+    //     if (todoLocal.id === todoServer.id) {
+    //       console.log(todoServer.id);
+    //       if (todoLocal.date > todoServer.date) {
+    //         console.log(
+    //           "todoLocal.date",
+    //           todoLocal.date,
+    //           ">",
+    //           "todoServer.date",
+    //           todoServer.date
+    //         );
+    //         console.log(index, "todoLocal", todoLocal);
+    //         newArr.push(todoLocal);
+    //       } else {
+    //         console.log(
+    //           "todoLocal.date",
+    //           todoLocal.date,
+    //           "< or =",
+    //           "todoServer.date",
+    //           todoServer.date
+    //         );
+
+    //         console.log(index, "todoServer", todoServer);
+    //         newArr.push(todoServer);
+    //       }
+    //       if (todoServer.date === undefined) {
+    //         console.log("todoServer.date === undefined");
+    //         console.log(index, "todoServer", todoServer);
+    //         newArr.push(todoServer);
+    //       }
+    //     } else {
+    //     }
+    //   });
+    //   if (todoLocal.date === undefined) {
+    //     console.log("todoLocal.date === undefined");
+    //     console.log(index, "todoLocal", todoLocal);
+    //     newArr.push(todoLocal);
+    //   }
+    // });
+    // console.log(newArr);
   };
 
   const compareValues = (editDate, dataFromServer) => {
     console.log("editDate APP", editDate);
     console.log("editDate SERVER", dataFromServer.date);
 
+    findAndReplaceData(todoList, dataFromServer.todoList);
+
     if (dataFromServer.date > editDate) {
       console.log("NEED DOWNLOAD");
 
-      // findAndReplaceDataFromServer(todoList, dataFromServer.todoList);
       setTodoList(dataFromServer.todoList);
       setCategoryList(dataFromServer.categoryList);
     } else if (dataFromServer.date === editDate) {
@@ -112,7 +159,7 @@ export default function Auth({
     } else {
       console.log("NEED UPLOAD");
 
-      writeUserData();
+      // writeUserData();
     }
   };
 
