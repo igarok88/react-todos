@@ -12,7 +12,7 @@
       "listId": 1,
       "description": "Изучить HTML",
       "isChecked": true,
-      "date": 1
+      "date": 2
     },
     {
       "id": 2,
@@ -24,22 +24,23 @@
     {
       "id": 3,
       "listId": 2,
-      "description": "Изучить JS",
+      "description": "del",
       "isChecked": false,
-      "date": 100000000000000000000000000
+      "date": 1
     },
     {
       "id": 4,
       "listId": 3,
-      "description": "Изучить React",
+      "description": "del",
       "isChecked": false,
-      "date": 100000000000000000000000001
+      "date": 1
     },
     {
       "id": 5,
       "listId": 3,
       "description": "Изучить React Redux",
-      "isChecked": false
+      "isChecked": false,
+      "date": 1
     }
   ],
   "colors": [
