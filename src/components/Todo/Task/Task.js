@@ -26,17 +26,21 @@ export default function Task({
 
   const editTaskDescription = (taskDomElement) => {
     const copy = JSON.parse(JSON.stringify(todoList));
+
     copy.map((todo) => {
       if (todo.id === id) {
-        setEditDate(+new Date());
-
         todo.description = taskDomElement.innerText;
-        todo.date = editDate;
       }
       return todo;
     });
 
     if (!isEqual(todoList, copy)) {
+      copy.map((todo) => {
+        if (todo.id === id) {
+          todo.date = +new Date();
+        }
+        return todo;
+      });
       setTodoList(copy);
     }
   };

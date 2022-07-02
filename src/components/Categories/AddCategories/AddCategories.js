@@ -6,7 +6,7 @@ import { MdOutlineClose } from "react-icons/md";
 export default function AddCategories({
   colors,
   categoryList,
-  addList,
+  setCategoryList,
   inputValue,
   setInputValue,
 }) {
@@ -19,9 +19,10 @@ export default function AddCategories({
         id: Math.random(),
         name: inputValue,
         colorId,
+        date: +new Date(),
       };
       const newLists = [...categoryList, category];
-      addList(newLists);
+      setCategoryList(newLists);
       closePopup();
     }
   };

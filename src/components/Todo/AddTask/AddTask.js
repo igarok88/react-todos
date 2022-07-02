@@ -12,7 +12,6 @@ export default function AddTask({
   const [description, setDescription] = useState("");
   const addTask = (description) => {
     if (description) {
-      setEditDate(+new Date());
       setTodoList((prev) => [
         ...prev,
         {
@@ -20,7 +19,7 @@ export default function AddTask({
           listId,
           description,
           isChecked: false,
-          date: editDate,
+          date: +new Date(),
         },
       ]);
       setDescription("");

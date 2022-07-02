@@ -12,11 +12,14 @@ export default function App() {
   const [categoryList, setCategoryList] = useState(DB.lists);
   const [todoList, setTodoList] = useState(DB.tasks);
   const [deletedTodoList, setDeletedTodoList] = useState([]);
+  const [deletedCategoryList, setDeletedCategoryList] = useState([]);
   const [inputValue, setInputValue] = useState("");
 
   const [editDate, setEditDate] = useState(null);
 
-  console.log("deletedTodoList", deletedTodoList);
+  console.log("todoList", todoList);
+  console.log("categoryList", categoryList);
+  console.log("deletedCategoryList", deletedCategoryList);
 
   return (
     <div className="App">
@@ -29,6 +32,8 @@ export default function App() {
         setEditDate={setEditDate}
         deletedTodoList={deletedTodoList}
         setDeletedTodoList={setDeletedTodoList}
+        deletedCategoryList={deletedCategoryList}
+        setDeletedCategoryList={setDeletedCategoryList}
         colors={DB.colors}
         listId={listId}
         setListId={setListId}
@@ -44,6 +49,8 @@ export default function App() {
         setEditDate={setEditDate}
         deletedTodoList={deletedTodoList}
         setDeletedTodoList={setDeletedTodoList}
+        deletedCategoryList={deletedCategoryList}
+        setDeletedCategoryList={setDeletedCategoryList}
         listId={listId}
         setListId={setListId}
       />

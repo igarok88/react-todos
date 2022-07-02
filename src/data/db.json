@@ -1,10 +1,10 @@
 {
   "lists": [
-    { "id": 1, "name": "Покупки", "colorId": 1 },
-    { "id": 2, "name": "Фронтенд", "colorId": 2 },
-    { "id": 3, "name": "Фильмы", "colorId": 3 },
-    { "id": 4, "name": "Книги", "colorId": 4 },
-    { "id": 5, "name": "Личное", "colorId": 5 }
+    { "id": 1, "name": "Покупки", "colorId": 1, "date": 1 },
+    { "id": 2, "name": "Фронтенд", "colorId": 2, "date": 1 },
+    { "id": 3, "name": "Фильмы", "colorId": 3, "date": 2 },
+    { "id": 4, "name": "Книги", "colorId": 4, "date": 2 },
+    { "id": 5, "name": "Личное", "colorId": 5, "date": 2 }
   ],
   "tasks": [
     {

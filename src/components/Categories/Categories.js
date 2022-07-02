@@ -15,21 +15,18 @@ export default function Categories({
   setEditDate,
   deletedTodoList,
   setDeletedTodoList,
+  deletedCategoryList,
+  setDeletedCategoryList,
   colors,
   listId,
   setListId,
   inputValue,
   setInputValue,
 }) {
-  const addList = (obj) => {
-    setCategoryList(obj);
-    setEditDate(+new Date());
-  };
-
   return (
     <div className="categories">
       <AddCategories
-        addList={addList}
+        setCategoryList={setCategoryList}
         colors={colors}
         categoryList={categoryList}
         inputValue={inputValue}
@@ -70,6 +67,8 @@ export default function Categories({
         setEditDate={setEditDate}
         deletedTodoList={deletedTodoList}
         setDeletedTodoList={setDeletedTodoList}
+        deletedCategoryList={deletedCategoryList}
+        setDeletedCategoryList={setDeletedCategoryList}
       />
     </div>
   );

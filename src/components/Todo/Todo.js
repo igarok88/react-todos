@@ -15,6 +15,8 @@ export default function Todo({
   setCategoryList,
   deletedTodoList,
   setDeletedTodoList,
+  deletedCategoryList,
+  setDeletedCategoryList,
   listId,
   setListId,
   editDate,
@@ -27,49 +29,58 @@ export default function Todo({
     const current = copy.find((todo) => todo.id === id);
 
     current.isChecked = !current.isChecked;
-    setEditDate(+new Date());
-    current.date = editDate;
+    current.date = +new Date();
     setTodoList(copy);
   };
 
   const removeTask = (id) => {
-    const copy = [...todoList];
-    const newTodoList = copy.filter((todo) => todo.id !== id);
-    const deletedTask = copy.find((todo) => todo.id === id);
-    const copyDelTodoList = [...deletedTodoList, deletedTask];
-    setDeletedTodoList(copyDelTodoList);
+    const newTodoList = [...todoList].filter((todo) => todo.id !== id);
+    const deletedTask = [...todoList].find((todo) => todo.id === id);
+    setDeletedTodoList([...deletedTodoList, deletedTask.id]);
     setTodoList(newTodoList);
-    setEditDate(+new Date());
+    // setEditDate(+new Date());
   };
 
   const editCategory = (categoryDomElement) => {
     const copy = JSON.parse(JSON.stringify(categoryList));
     copy.map((category) => {
       if (category.id === +categoryDomElement.id) {
-        setEditDate(+new Date());
         category.name = categoryDomElement.innerText;
-        category.date = editDate;
       }
       return category;
     });
 
     if (!isEqual(categoryList, copy)) {
+      copy.map((category) => {
+        if (category.id === +categoryDomElement.id) {
+          category.date = +new Date();
+        }
+        return category;
+      });
       setCategoryList(copy);
     }
   };
 
   const deleteCategory = (id) => {
-    const copyTodoList = [...todoList];
-    const newTodoList = copyTodoList.filter((todo) => todo.listId !== id);
+    const newTodoList = [...todoList].filter((todo) => todo.listId !== id);
     setTodoList(newTodoList);
 
-    const copyCategoryList = [...categoryList];
-    const newCategoryList = copyCategoryList.filter(
+    const deletedTodoInCategory = [...todoList]
+      .filter((todo) => todo.listId === id)
+      .map((todo) => todo.id);
+    const newDelTodoList = [...deletedTodoList, ...deletedTodoInCategory];
+    setDeletedTodoList(newDelTodoList);
+
+    const deletedCategory = [...categoryList].find(
+      (category) => category.id === id
+    );
+    setDeletedCategoryList([...deletedCategoryList, deletedCategory.id]);
+
+    const newCategoryList = [...categoryList].filter(
       (category) => category.id !== id
     );
     setCategoryList(newCategoryList);
     setListId("all");
-    setEditDate(+new Date());
   };
 
   return (
