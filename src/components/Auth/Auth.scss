@@ -1,12 +1,13 @@
 .categories {
-  &__auth-wrapper {
+  &__auth-sync-wrapper {
     position: absolute;
     bottom: 0;
     display: flex;
     justify-content: space-between;
-    margin: 15px;
-    padding-left: 6px;
-    width: 80%;
+    padding: 0 21px 0;
+    width: 100%;
+    background-color: rgb(50, 18, 124);
+    overflow: hidden;
   }
   &__auth-arrow-btn {
     cursor: pointer;
@@ -16,42 +17,88 @@
     justify-content: center;
     align-items: center;
     transform: rotate(90deg);
-    transition: transform ease 0.5s;
+    animation-duration: 0.3s;
+    margin-left: 6px;
   }
   &__auth-arrow-btn.show {
+    animation-name: arrowHide;
     transform: rotate(0);
+  }
+  &__auth-arrow-btn.hide {
+    animation-name: arrowShow;
+    transform: rotate(90deg);
+  }
+  @keyframes arrowShow {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(90deg);
+    }
+  }
+  @keyframes arrowHide {
+    from {
+      transform: rotate(90deg);
+    }
+    to {
+      transform: rotate(0);
+    }
   }
   &__auth-sync {
     position: relative;
     overflow: hidden;
     z-index: 10;
     width: 100%;
-    transition: all 0.5s ease;
   }
   &__auth-sign {
+    // cursor: pointer;
     position: absolute;
     right: 0;
     left: 0;
-    bottom: -100%;
     display: flex;
-
-    // display: none;
-    // padding: 15px;
-    // margin: 15px;
-
+    bottom: -100%;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    animation-duration: 0.3s;
+    margin-left: 25px;
+    margin-right: 4px;
   }
   &__auth-sign.show {
+    animation-name: showLogin;
     bottom: 0;
-    // display: flex;
+  }
+  &__auth-sign.hide {
+    animation-name: hideLogin;
+    bottom: -100%;
+  }
+
+  @keyframes showLogin {
+    from {
+      bottom: -100%;
+      opacity: 0;
+    }
+    to {
+      bottom: 0;
+      opacity: 1;
+    }
+  }
+  @keyframes hideLogin {
+    from {
+      bottom: 0;
+      opacity: 1;
+    }
+    to {
+      bottom: -100%;
+      opacity: 0;
+    }
   }
   &__auth-title {
     cursor: pointer;
+    margin-left: -10px;
   }
   &__auth-icon {
-    margin: 15px;
-    margin-right: 12px;
+    margin: 15px 10px;
+    // margin-right: 12px;
     display: flex;
     align-items: center;
     width: 20px;
@@ -60,8 +107,8 @@
   }
   &__auth-avatar {
     margin: 0 15px;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 5px;
   }
 }

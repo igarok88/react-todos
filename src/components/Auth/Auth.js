@@ -32,11 +32,10 @@ export default function Auth({
   const loginArrowBtn = useRef(null);
   const loginAuthRef = useRef(null);
 
-  const [login, setLogin] = useState(true);
-  const [showLogin, setShowLogin] = useState(false);
+  const [login, setLogin] = useState(false);
+  const [showLogin, setShowLogin] = useState(true);
   const [userData, setUserData] = useState(null);
-  console.log("showLogin", showLogin);
-  console.log(userData);
+
   const signInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
@@ -62,22 +61,24 @@ export default function Auth({
       });
   };
   const toggleShowLogin = () => {
-    console.log("toggleShowLogin");
     setShowLogin(!showLogin);
-    console.log(showLogin);
     const loginBtn = loginArrowBtn.current;
     const loginAuth = loginAuthRef.current;
     if (showLogin) {
+      loginBtn.classList.remove("hide");
+      loginAuth.classList.remove("hide");
       loginBtn.classList.add("show");
       loginAuth.classList.add("show");
     } else {
       loginBtn.classList.remove("show");
       loginAuth.classList.remove("show");
+      loginBtn.classList.add("hide");
+      loginAuth.classList.add("hide");
     }
   };
 
   return (
-    <div className="categories__auth-wrapper">
+    <div className="categories__auth-sync-wrapper">
       <div
         className="categories__auth-arrow-btn"
         onClick={toggleShowLogin}

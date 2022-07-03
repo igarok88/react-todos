@@ -9,7 +9,7 @@ export default function CategoriesItem({
   activeClass,
   colorCircle,
 }) {
-  const categoriesItemClasses = ["categories__item-wrapper"];
+  const categoriesItemClasses = ["categories__item"];
   if (activeClass) {
     categoriesItemClasses.push(activeClass);
   }

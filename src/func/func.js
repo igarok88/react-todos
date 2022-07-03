@@ -21,3 +21,29 @@ export const isEqual = (object1 = {}, object2 = {}) => {
 
   return true;
 };
+
+export const getScrollWidth = () => {
+  //получаем ширину скроллбара
+  const div = document.createElement("div");
+  div.style.overflowY = "scroll";
+  div.style.width = "50px";
+  div.style.height = "50px";
+  // мы должны вставить элемент в документ, иначе размеры будут равны 0
+  document.body.append(div);
+  const scrollWidth = div.offsetWidth - div.clientWidth;
+  div.remove();
+  return scrollWidth;
+};
+
+export const compensateScroll = (refElement) => {
+  const element = refElement.current;
+
+  const winHeight = element.clientHeight;
+  const allDocHeight = element.scrollHeight;
+
+  if (allDocHeight > winHeight) {
+    element.style.paddingRight = 0;
+  } else {
+    element.style.paddingRight = getScrollWidth() + "px";
+  }
+};

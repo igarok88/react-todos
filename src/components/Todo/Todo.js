@@ -1,9 +1,9 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 import { VscEdit } from "react-icons/vsc";
 import { ImCross } from "react-icons/im";
 
-import { isEqual } from "../../func/func";
+import { isEqual, compensateScroll } from "../../func/func";
 import AddTask from "./AddTask/AddTask";
 import Task from "./Task/Task";
 import "./Todo.scss";
@@ -22,7 +22,16 @@ export default function Todo({
   editDate,
   setEditDate,
 }) {
+  const todoListRef = useRef(null);
   const categoryNameRef = useRef([]);
+
+  useEffect(() => {
+    resizeWindow();
+  });
+
+  const resizeWindow = () => {
+    window.addEventListener("resize", compensateScroll(todoListRef));
+  };
 
   const checkedTask = (id) => {
     const copy = [...todoList];
@@ -84,7 +93,7 @@ export default function Todo({
   };
 
   return (
-    <div className="todo">
+    <div className="todo" ref={todoListRef}>
       {categoryList && categoryList.length > 0 ? (
         <>
           {"all" === listId ? (
