@@ -58,7 +58,7 @@
     display: flex;
     bottom: -100%;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     animation-duration: 0.3s;
     margin-left: 25px;
     margin-right: 4px;
@@ -105,6 +105,25 @@
     height: 20px;
     cursor: pointer;
   }
+  &__sync {
+    transition: transform ease 2s;
+    transform: rotate(0);
+  }
+
+  &__sync.sync-process {
+    // animation: syncProcess 2s infinite;
+    transform: rotate(360deg);
+  }
+
+  // @keyframes syncProcess {
+  //   from {
+  //     transform: rotate(0);
+  //   }
+  //   to {
+  //     transform: rotate(360deg);
+  //   }
+  // }
+
   &__auth-avatar {
     margin: 0 15px;
     width: 30px;

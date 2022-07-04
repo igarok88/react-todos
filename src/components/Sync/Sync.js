@@ -1,4 +1,6 @@
-import { ref, set, child, get } from "firebase/database";
+import { useState } from "react";
+
+import { ref, set, child, get, once } from "firebase/database";
 import { db } from "../../firebase/firebaseConfig";
 
 import { VscSync } from "react-icons/vsc";
@@ -16,6 +18,11 @@ export default function Sync({
   deletedCategoryList,
   setDeletedCategoryList,
 }) {
+  const [syncProcess, setSyncProcess] = useState(false);
+  const [syncAnimation, setSyncAnimation] = useState(false);
+  console.log("syncProcess", syncProcess);
+  console.log("syncAnimation", syncAnimation);
+
   const readUserData = () => {
     const dbRef = ref(db);
     get(child(dbRef, userData.uid))
@@ -46,26 +53,27 @@ export default function Sync({
     deletedTodoList,
     deletedCategoryList
   ) => {
-    console.log("writeUserData");
-    console.log("todoList", todoList);
-    console.log("categoryList", categoryList);
-    console.log("deletedTodoList", deletedTodoList);
-    console.log("deletedCategoryList", deletedCategoryList);
-
     set(ref(db, userData.uid), {
       categoryList,
       todoList,
       deletedTodoList,
       deletedCategoryList,
+    }).then(() => {
+      console.log("data validation");
+      get(child(ref(db), userData.uid))
+        .then((snapshot) => {
+          console.log("data writed", snapshot.val());
+          //ждем окончания анимации
+          setSyncProcess(false);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     });
-    console.log("write done");
   };
 
   const getServerData = (server) => {
     const compareServerAndLocalData = (server, local) => {
-      console.log(local);
-      console.log(server);
-
       if (!server.todoList) {
         server.todoList = [];
       }
@@ -95,11 +103,6 @@ export default function Sync({
         deletedCategoryList: localDelCategoryList,
       } = local;
 
-      console.log("serverTodoList", serverTodoList);
-      console.log("localTodoList", localTodoList);
-      console.log("servDelTodoList", servDelTodoList);
-      console.log("localDelTodoList", localDelTodoList);
-
       //handler del list
       const syncListDeleted = (delListServer, delListLocal) => {
         delListServer.forEach((servItem, index) => {
@@ -121,14 +124,12 @@ export default function Sync({
         servDelTodoList,
         localDelTodoList
       );
-      console.log("finalDelTodoList", finalDelTodoList);
       setDeletedTodoList(finalDelTodoList);
 
       const finalDelCategoryList = syncListDeleted(
         servDelCategoryList,
         localDelCategoryList
       );
-      console.log("finalDelCategoryList", finalDelCategoryList);
       setDeletedCategoryList(finalDelCategoryList);
 
       //handler list
@@ -153,13 +154,11 @@ export default function Sync({
         return concatData;
       };
       const concatTodoList = syncList(serverTodoList, localTodoList);
-      console.log("concatData", concatTodoList);
 
       const concatCategoryList = syncList(
         serverCategoryList,
         localCategoryList
       );
-      console.log("concatCategoryList", concatCategoryList);
 
       //handler list and del list
       const syncListAndDelList = (concatData, deletedTodoList) => {
@@ -183,14 +182,12 @@ export default function Sync({
         concatTodoList,
         finalDelTodoList
       );
-      console.log("finalTodoList", finalTodoList);
       setTodoList(finalTodoList);
 
       const finalCategoryList = syncListAndDelList(
         concatCategoryList,
         finalDelCategoryList
       );
-      console.log("finalCategoryList", finalCategoryList);
       setCategoryList(finalCategoryList);
 
       writeUserData(
@@ -211,8 +208,30 @@ export default function Sync({
 
   const syncData = () => {
     console.log("start sync");
+    setSyncProcess(true);
+    setSyncAnimation(true);
+
     readUserData();
   };
 
-  return <VscSync className="categories__auth-icon" onClick={syncData} />;
+  const handlerSyncAnimation = () => {
+    console.log("end anim");
+
+    setSyncAnimation(false);
+
+    // setSyncProcess(false);
+  };
+
+  const syncClasses = ["categories__auth-icon categories__sync"];
+  if (syncProcess) {
+    syncClasses.push("sync-process");
+  }
+
+  return (
+    <VscSync
+      className={syncClasses.join(" ")}
+      onClick={syncData}
+      onAnimationEnd={handlerSyncAnimation}
+    />
+  );
 }

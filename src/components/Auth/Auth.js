@@ -33,6 +33,7 @@ export default function Auth({
   const loginAuthRef = useRef(null);
 
   const [login, setLogin] = useState(false);
+
   const [showLogin, setShowLogin] = useState(true);
   const [userData, setUserData] = useState(null);
 

@@ -17,9 +17,9 @@ export default function App() {
 
   const [editDate, setEditDate] = useState(null);
 
-  console.log("todoList", todoList);
-  console.log("categoryList", categoryList);
-  console.log("deletedCategoryList", deletedCategoryList);
+  // console.log("todoList", todoList);
+  // console.log("categoryList", categoryList);
+  // console.log("deletedCategoryList", deletedCategoryList);
 
   return (
     <div className="App">
