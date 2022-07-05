@@ -20,6 +20,10 @@
       box-shadow: 0px 0px 40px 0px #3e5497;
     }
   }
+  &.show-small &__add-wrapper {
+    margin: 15px 7px;
+    padding: 0;
+  }
   &__add-icon {
     width: 18px;
     height: 18px;
@@ -31,6 +35,11 @@
     transform: rotate(45deg);
     color: #fcfcfd;
   }
+  &.show-small &__add-icon {
+    width: 30px;
+    height: 30px;
+    // font-size: 28px;
+  }
 
   &__add-title {
     color: #fcfcfd;
@@ -38,6 +47,9 @@
     width: 100%;
     font-size: 15px;
     font-family: "Roboto-Regular";
+  }
+  &.show-small &__add-title {
+    display: none;
   }
   &__add-popup-backgroud {
     backdrop-filter: blur(2px);

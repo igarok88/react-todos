@@ -47,3 +47,13 @@ export const compensateScroll = (refElement) => {
     element.style.paddingRight = getScrollWidth() + "px";
   }
 };
+
+export const timeForAnimation = (leadTime) => {
+  //this function counts how much time is left before the timing animation completes. animation run time 2 seconds
+  let timeAnimation = 2000;
+  while (leadTime > timeAnimation) {
+    timeAnimation = timeAnimation + 2000;
+  }
+
+  return timeAnimation - leadTime;
+};

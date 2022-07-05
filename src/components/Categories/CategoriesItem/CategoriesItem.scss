@@ -1,10 +1,11 @@
 .categories {
   &__items {
-    padding: 50px 5px;
+    padding: 0px 5px 50px;
     overflow: auto;
     height: 100%;
   }
   &__item {
+    position: relative;
     cursor: pointer;
     margin: 15px;
     padding: 15px;
@@ -20,10 +21,23 @@
       box-shadow: 0px 0px 40px 0px #3e5497;
     }
   }
+  &.show-small &__item {
+    padding: 6px;
+    margin: 13px 0px;
+  }
+  &.show-small &__name:nth-child(1) {
+    display: none;
+  }
   &__title {
     display: flex;
+    overflow: hidden;
+  }
+
+  &.show-small &__title {
+    overflow: visible;
   }
   &__icon {
+    flex-shrink: 0;
     width: 18px;
     height: 18px;
     border-radius: 50%;
@@ -31,17 +45,51 @@
     display: flex;
     align-items: center;
   }
+  &.show-small &__icon {
+    width: 35px;
+    height: 35px;
+    font-size: 36px;
+    margin: 0;
+    border-radius: 8px;
+  }
   &__name {
     font-size: 15px;
-
     font-family: "Roboto-Regular";
+    white-space: nowrap; /* Текст не переносится */
+    overflow: hidden; /* Обрезаем всё за пределами блока */
+    text-overflow: ellipsis; /* Добавляем многоточие */
   }
-
+  &.show-small &__name {
+    position: absolute;
+    overflow: hidden;
+    top: 6px;
+    left: 9px;
+    width: 27px;
+  }
+  &.show-small &__name::first-letter {
+    font-size: 25px;
+  }
   &__name.checked {
     text-decoration: underline;
   }
   &__count {
     margin-left: 15px;
     align-self: flex-end;
+  }
+  &.show-small &__count {
+    position: absolute;
+    padding-bottom: 2px;
+    top: 0px;
+    right: 0px;
+    padding: 2px;
+    background-color: rgb(194, 81, 81);
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    font-size: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.5;
   }
 }

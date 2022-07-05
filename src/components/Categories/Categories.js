@@ -2,6 +2,7 @@ import { useRef, useEffect } from "react";
 
 import { RiBarChartHorizontalLine } from "react-icons/ri";
 
+import { MdKeyboardArrowRight } from "react-icons/md";
 import CategoriesItem from "./CategoriesItem/CategoriesItem";
 import AddCategories from "./AddCategories/AddCategories";
 import Auth from "../Auth/Auth";
@@ -27,6 +28,7 @@ export default function Categories({
   inputValue,
   setInputValue,
 }) {
+  const categoriesRef = useRef(null);
   const categoriesItemsRef = useRef(null);
 
   useEffect(() => {
@@ -47,9 +49,15 @@ export default function Categories({
       }
     });
   };
+  const toggleMenu = () => {
+    categoriesRef.current.classList.toggle("show-small");
+  };
 
   return (
-    <div className="categories">
+    <div className="categories" ref={categoriesRef}>
+      <div className="categories__menu-btn" onClick={toggleMenu}>
+        <MdKeyboardArrowRight />
+      </div>
       <div className="categories__items" ref={categoriesItemsRef}>
         <AddCategories
           setCategoryList={setCategoryList}

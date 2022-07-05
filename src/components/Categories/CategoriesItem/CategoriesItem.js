@@ -34,15 +34,13 @@ export default function CategoriesItem({
         <div className="categories__name">{name}</div>
       </div>
 
-      <div className="categories__count">
-        {id === "all"
-          ? allNotCheckedTaks
-            ? allNotCheckedTaks
-            : null
-          : allNotCheckedTaksCategory
-          ? allNotCheckedTaksCategory
-          : null}
-      </div>
+      {id === "all" ? (
+        allNotCheckedTaks ? (
+          <div className="categories__count">{allNotCheckedTaks}</div>
+        ) : null
+      ) : allNotCheckedTaksCategory ? (
+        <div className="categories__count">{allNotCheckedTaksCategory}</div>
+      ) : null}
     </div>
   );
 }

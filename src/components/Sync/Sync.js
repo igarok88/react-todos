@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { ref, set, child, get, once } from "firebase/database";
 import { db } from "../../firebase/firebaseConfig";
 
 import { VscSync } from "react-icons/vsc";
+import { useRef } from "react";
+import { timeForAnimation } from "../../func/func";
 
 export default function Sync({
   userData,
@@ -19,9 +21,18 @@ export default function Sync({
   setDeletedCategoryList,
 }) {
   const [syncProcess, setSyncProcess] = useState(false);
+  const [syncSuccess, setSyncSuccess] = useState(false);
+  const [syncError, setSyncError] = useState(false);
+
   const [syncAnimation, setSyncAnimation] = useState(false);
   console.log("syncProcess", syncProcess);
+
   console.log("syncAnimation", syncAnimation);
+
+  const syncRef = useRef(null);
+
+  let timeStartSyncProcess;
+  let timeFinishSyncProcess;
 
   const readUserData = () => {
     const dbRef = ref(db);
@@ -58,18 +69,31 @@ export default function Sync({
       todoList,
       deletedTodoList,
       deletedCategoryList,
-    }).then(() => {
-      console.log("data validation");
-      get(child(ref(db), userData.uid))
-        .then((snapshot) => {
-          console.log("data writed", snapshot.val());
-          //ждем окончания анимации
-          setSyncProcess(false);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    });
+    })
+      .then(() => {
+        console.log("data validation");
+        get(child(ref(db), userData.uid))
+          .then((snapshot) => {
+            console.log("data writed", snapshot.val());
+            //ждем окончания анимации
+            setSyncProcess(false);
+
+            timeFinishSyncProcess = +new Date();
+
+            setTimeout(() => {
+              setSyncAnimation(false);
+              setSyncSuccess(true);
+            }, timeForAnimation(timeFinishSyncProcess - timeStartSyncProcess));
+          })
+          .catch((error) => {
+            console.error(error);
+            setSyncError(true);
+          });
+      })
+      .catch((error) => {
+        console.error(error);
+        setSyncError(true);
+      });
   };
 
   const getServerData = (server) => {
@@ -207,31 +231,42 @@ export default function Sync({
   };
 
   const syncData = () => {
+    timeStartSyncProcess = +new Date();
     console.log("start sync");
     setSyncProcess(true);
+    setSyncSuccess(false);
     setSyncAnimation(true);
 
     readUserData();
   };
 
-  const handlerSyncAnimation = () => {
-    console.log("end anim");
+  const syncClasses = ["categories__sync"];
+  const syncErrMessageClasses = ["categories__sync-error-message"];
 
-    setSyncAnimation(false);
-
-    // setSyncProcess(false);
-  };
-
-  const syncClasses = ["categories__auth-icon categories__sync"];
-  if (syncProcess) {
+  if (syncAnimation) {
     syncClasses.push("sync-process");
   }
+  if (syncSuccess) {
+    syncClasses.push("success");
+    setTimeout(() => {
+      setSyncSuccess(false);
+    }, 5000);
+  }
+  if (syncError) {
+    syncClasses.push("error");
+    syncErrMessageClasses.push("error");
+    setTimeout(() => {
+      setSyncError(false);
+    }, 15000);
+  }
+  // console.log(syncRef.current);
 
   return (
-    <VscSync
-      className={syncClasses.join(" ")}
-      onClick={syncData}
-      onAnimationEnd={handlerSyncAnimation}
-    />
+    <div ref={syncRef} className={syncClasses.join(" ")}>
+      <div className={syncErrMessageClasses.join(" ")}>
+        Sync failed, please check your internet connection or try again later
+      </div>
+      <VscSync className="categories__auth-icon" onClick={syncData} />
+    </div>
   );
 }

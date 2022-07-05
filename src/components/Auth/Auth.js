@@ -31,6 +31,7 @@ export default function Auth({
 }) {
   const loginArrowBtn = useRef(null);
   const loginAuthRef = useRef(null);
+  const authSyncWrapperRef = useRef(null);
 
   const [login, setLogin] = useState(false);
 
@@ -65,21 +66,29 @@ export default function Auth({
     setShowLogin(!showLogin);
     const loginBtn = loginArrowBtn.current;
     const loginAuth = loginAuthRef.current;
+    const authSyncWrapper = authSyncWrapperRef.current;
+    // if (showLogin) {
+    //   loginBtn.classList.remove("hide");
+    //   loginAuth.classList.remove("hide");
+    //   loginBtn.classList.add("show");
+    //   loginAuth.classList.add("show");
+    // } else {
+    //   loginBtn.classList.remove("show");
+    //   loginAuth.classList.remove("show");
+    //   loginBtn.classList.add("hide");
+    //   loginAuth.classList.add("hide");
+    // }
     if (showLogin) {
-      loginBtn.classList.remove("hide");
-      loginAuth.classList.remove("hide");
-      loginBtn.classList.add("show");
-      loginAuth.classList.add("show");
+      authSyncWrapper.classList.remove("hide");
+      authSyncWrapper.classList.add("show");
     } else {
-      loginBtn.classList.remove("show");
-      loginAuth.classList.remove("show");
-      loginBtn.classList.add("hide");
-      loginAuth.classList.add("hide");
+      authSyncWrapper.classList.remove("show");
+      authSyncWrapper.classList.add("hide");
     }
   };
 
   return (
-    <div className="categories__auth-sync-wrapper">
+    <div className="categories__auth-sync-wrapper" ref={authSyncWrapperRef}>
       <div
         className="categories__auth-arrow-btn"
         onClick={toggleShowLogin}
