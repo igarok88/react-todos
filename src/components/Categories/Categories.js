@@ -55,10 +55,10 @@ export default function Categories({
 
   return (
     <div className="categories" ref={categoriesRef}>
-      <div className="categories__menu-btn" onClick={toggleMenu}>
+      <div className="categories__menu-arrow-btn" onClick={toggleMenu}>
         <MdKeyboardArrowRight />
       </div>
-      <div className="categories__items" ref={categoriesItemsRef}>
+      <div className="categories__static-items">
         <AddCategories
           setCategoryList={setCategoryList}
           colors={colors}
@@ -76,6 +76,8 @@ export default function Categories({
             icon={<RiBarChartHorizontalLine />}
           />
         )}
+      </div>
+      <div className="categories__items" ref={categoriesItemsRef}>
         {categoryList.map((list) => {
           list.color = colors.filter(
             (color) => color.id === list.colorId
