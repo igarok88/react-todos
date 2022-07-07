@@ -6,6 +6,7 @@ import { ImCross } from "react-icons/im";
 import { isEqual, compensateScroll } from "../../func/func";
 import AddTask from "./AddTask/AddTask";
 import Task from "./Task/Task";
+import Auth from "../Auth/Auth";
 import "./Todo.scss";
 
 export default function Todo({
@@ -220,7 +221,7 @@ export default function Todo({
         </>
       ) : (
         <h2 className="todo__no-tasks">Задачи отсутствуют</h2>
-      )}
+      )}{" "}
     </div>
   );
 }

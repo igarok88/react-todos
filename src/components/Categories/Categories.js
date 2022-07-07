@@ -95,19 +95,6 @@ export default function Categories({
           );
         })}
       </div>
-
-      <Auth
-        todoList={todoList}
-        setTodoList={setTodoList}
-        categoryList={categoryList}
-        setCategoryList={setCategoryList}
-        editDate={editDate}
-        setEditDate={setEditDate}
-        deletedTodoList={deletedTodoList}
-        setDeletedTodoList={setDeletedTodoList}
-        deletedCategoryList={deletedCategoryList}
-        setDeletedCategoryList={setDeletedCategoryList}
-      />
     </div>
   );
 }

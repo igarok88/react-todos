@@ -18,7 +18,7 @@
     align-items: center;
     justify-content: center;
     border: 1px solid transparent;
-    transition: background-color, border 0.7s ease;
+    transition: all 0.5s ease;
     &:hover {
       background-color: lighten($color: #183588, $amount: 20);
       border: 1px solid #eaecf1;
@@ -40,7 +40,7 @@
     cursor: pointer;
     color: #183588;
     margin: 5px;
-    transition: color 0.7s ease;
+    transition: all 0.5s ease;
     &:hover {
       color: lighten($color: #183588, $amount: 70);
     }

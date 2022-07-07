@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import Todo from "./components/Todo/Todo";
 import Categories from "./components/Categories/Categories";
+import Auth from "./components/Auth/Auth";
 
 import DB from "./data/db.json";
 
@@ -53,6 +54,18 @@ export default function App() {
         setDeletedCategoryList={setDeletedCategoryList}
         listId={listId}
         setListId={setListId}
+      />{" "}
+      <Auth
+        todoList={todoList}
+        setTodoList={setTodoList}
+        categoryList={categoryList}
+        setCategoryList={setCategoryList}
+        editDate={editDate}
+        setEditDate={setEditDate}
+        deletedTodoList={deletedTodoList}
+        setDeletedTodoList={setDeletedTodoList}
+        deletedCategoryList={deletedCategoryList}
+        setDeletedCategoryList={setDeletedCategoryList}
       />
     </div>
   );

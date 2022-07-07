@@ -6,6 +6,7 @@
   &__items {
     padding: 0 5px;
     overflow: auto;
+    justify-content: center;
   }
 
   &__item {
@@ -18,7 +19,7 @@
     align-items: center;
     border-radius: 10px;
 
-    transition: box-shadow 0.7s ease;
+    transition: all 0.5s ease;
     &.active {
       box-shadow: 0px 0px 10px 0px #3e5497;
     }
@@ -27,6 +28,7 @@
     }
   }
   &.show-small &__item {
+    justify-content: center;
     padding: 6px;
     margin: 13px 0px;
     &.active {
@@ -54,6 +56,8 @@
     margin-right: 15px;
     display: flex;
     align-items: center;
+    justify-content: center;
+    font-size: 28px;
   }
   &.show-small &__icon {
     width: 35px;
@@ -64,22 +68,24 @@
   }
   &__name {
     transition: all ease 0.5s;
+    opacity: 1;
+    visibility: visible;
+    // width: 100%;
     font-size: 15px;
     font-family: "Roboto-Regular";
     white-space: nowrap; /* Текст не переносится */
     overflow: hidden; /* Обрезаем всё за пределами блока */
     text-overflow: ellipsis; /* Добавляем многоточие */
-    width: 100%;
   }
   &.show-small &__name {
     transition: all ease 0.5s;
     font-size: 25px;
     opacity: 0;
     visibility: hidden;
-    position: absolute;
     overflow: hidden;
-    top: 6px;
-    left: 9px;
+    position: absolute;
+    top: 8px;
+    left: 11px;
     width: 27px;
     -webkit-text-stroke: 1px rgba(0, 0, 0, 0.103);
   }
