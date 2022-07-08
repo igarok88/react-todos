@@ -13,7 +13,8 @@ import {
   MdOutlineLogin,
   MdKeyboardArrowRight,
 } from "react-icons/md";
-
+import { VscSync } from "react-icons/vsc";
+import { MdOutlineClose } from "react-icons/md";
 import Sync from "../Sync/Sync";
 import "./Auth.scss";
 
@@ -88,17 +89,10 @@ export default function Auth({
   };
 
   return (
-    <div className="categories__auth-sync-wrapper" ref={authSyncWrapperRef}>
-      <div
-        className="categories__auth-arrow-btn"
-        onClick={toggleShowLogin}
-        ref={loginArrowBtn}
-      >
-        <MdKeyboardArrowRight />
-      </div>
-      <div className="categories__auth-sync">
+    <div className="authentication" ref={authSyncWrapperRef}>
+      <div className="authentication__auth-sync">
         {login ? (
-          <div className="categories__auth-sign" ref={loginAuthRef}>
+          <div className="authentication__auth-sign" ref={loginAuthRef}>
             <Sync
               userData={userData}
               todoList={todoList}
@@ -114,28 +108,45 @@ export default function Auth({
             />
             {userData && (
               <img
-                className="categories__auth-avatar"
+                className="authentication__auth-avatar"
                 src={userData.img}
                 alt="avatar"
               />
             )}
 
             <MdOutlineLogout
-              className="categories__auth-icon"
+              className="authentication__auth-icon"
               onClick={singOut}
             />
           </div>
         ) : (
           <div
-            className="categories__auth-sign"
+            className="authentication__auth-sign"
             onClick={signInWithGoogle}
             ref={loginAuthRef}
           >
-            <div className="categories__auth-title">Sign in for sync</div>
-            <MdOutlineLogin className="categories__auth-icon" />
+            <div className="authentication__auth-title">Sign in for sync</div>
+            <MdOutlineLogin className="authentication__auth-icon" />
           </div>
         )}
-      </div>
+      </div>{" "}
+      {showLogin ? (
+        <div
+          className="authentication__auth-show-btn"
+          onClick={toggleShowLogin}
+          ref={loginArrowBtn}
+        >
+          <VscSync />
+        </div>
+      ) : (
+        <div
+          className="authentication__auth-show-btn"
+          onClick={toggleShowLogin}
+          ref={loginArrowBtn}
+        >
+          <MdOutlineClose />
+        </div>
+      )}
     </div>
   );
 }

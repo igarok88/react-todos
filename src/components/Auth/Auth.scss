@@ -1,122 +1,80 @@
-.categories {
-  &__auth-sync-wrapper {
-    color: #fff;
-    position: absolute;
-    bottom: 0;
-    display: flex;
-    justify-content: space-between;
-    // padding: 0 21px 0;
-    width: 100%;
-    // background-color: rgb(50, 18, 124);
-    z-index: 10;
-    overflow: hidden;
-  }
-  &.show-small &__auth-sync-wrapper {
-    padding: 0;
-    width: 210px;
-  }
-  &__auth-arrow-btn {
+.authentication {
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-right: 20px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: flex-end;
+  width: 210px;
+  z-index: 10;
+  user-select: none;
+
+  &__auth-show-btn {
+    transition: all ease 0.5s;
     cursor: pointer;
-    font-size: 32px;
+    font-size: 27px;
+    width: 50px;
     height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
     transform: rotate(90deg);
     animation-duration: 0.3s;
-    margin-left: 27px;
+    border-radius: 50%;
+    background-color: rgb(50, 18, 124);
     z-index: 10;
   }
-  &.show-small &__auth-arrow-btn {
+  &.show-small &__auth-show-btn {
     margin-left: 12px;
   }
-  &__auth-sync-wrapper.show &__auth-arrow-btn {
-    animation-name: arrowHide;
+  .show &__auth-show-btn {
     transform: rotate(0);
   }
-  &__auth-sync-wrapper.hide &__auth-arrow-btn {
-    animation-name: arrowShow;
-    transform: rotate(90deg);
+  .hide &__auth-show-btn {
+    transform: rotate(180deg);
   }
-  @keyframes arrowShow {
-    from {
-      transform: rotate(0);
-    }
-    to {
-      transform: rotate(90deg);
-    }
-  }
-  @keyframes arrowHide {
-    from {
-      transform: rotate(90deg);
-    }
-    to {
-      transform: rotate(0);
-    }
-  }
+
   &__auth-sync {
+    display: flex;
     transition: all ease 0.5s;
     position: absolute;
+    left: 0;
+    margin-bottom: 10px;
     background-color: rgb(50, 18, 124);
-    bottom: -100%;
-
+    border-radius: 15px;
+    bottom: -200%;
     width: 100%;
-    height: 50px;
   }
   &.show-small &__auth-sync {
     border-top-right-radius: 15px;
   }
-  &__auth-sync-wrapper.show &__auth-sync {
+  .show &__auth-sync {
     bottom: 0;
+    visibility: visible;
   }
-  &__auth-sync-wrapper.hide &__auth-sync {
-    bottom: -100%;
+  .hide &__auth-sync {
+    bottom: -200%;
+    visibility: hidden;
   }
   &__auth-sign {
-    // cursor: pointer;
-    position: absolute;
-    right: 0;
-    left: 0;
     display: flex;
-    bottom: -100%;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-start;
     animation-duration: 0.3s;
-    margin-left: 25px;
-    margin-right: 4px;
+    padding-left: 15px;
   }
-  &__auth-sync-wrapper.show &__auth-sign {
-    animation-name: showLogin;
+  .show &__auth-sign {
     bottom: 0;
   }
-  &__auth-sync-wrapper.hide &__auth-sign {
-    animation-name: hideLogin;
+  .hide &__auth-sign {
     bottom: -100%;
   }
 
-  @keyframes showLogin {
-    from {
-      bottom: -100%;
-      opacity: 0;
-    }
-    to {
-      bottom: 0;
-      opacity: 1;
-    }
-  }
-  @keyframes hideLogin {
-    from {
-      bottom: 0;
-      opacity: 1;
-    }
-    to {
-      bottom: -100%;
-      opacity: 0;
-    }
-  }
   &__auth-title {
     cursor: pointer;
-    margin-left: -10px;
+    // margin-left: -10px;
   }
   &__auth-icon {
     margin: 15px 10px;
@@ -134,15 +92,16 @@
   &__sync-error-message {
     display: none;
     position: absolute;
-    width: 250px;
-    top: -60px;
-    left: -120px;
+    z-index: 11;
+    width: 210px;
+    top: -74px;
+    left: -15px;
     text-align: center;
     color: red;
     font-weight: bold;
     background-color: #fff;
     padding: 5px;
-    border-radius: 4px;
+    border-radius: 15px;
   }
   &__sync-error-message.error {
     display: block;
@@ -156,7 +115,6 @@
 
   &__sync.sync-process {
     animation: syncProcess 2s infinite;
-    // transform: rotate(360deg);
   }
 
   @keyframes syncProcess {

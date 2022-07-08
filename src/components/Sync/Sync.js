@@ -22,7 +22,7 @@ export default function Sync({
 }) {
   const [syncProcess, setSyncProcess] = useState(false);
   const [syncSuccess, setSyncSuccess] = useState(false);
-  const [syncError, setSyncError] = useState(false);
+  const [syncError, setSyncError] = useState(true);
 
   const [syncAnimation, setSyncAnimation] = useState(false);
   console.log("syncProcess", syncProcess);
@@ -240,8 +240,8 @@ export default function Sync({
     readUserData();
   };
 
-  const syncClasses = ["categories__sync"];
-  const syncErrMessageClasses = ["categories__sync-error-message"];
+  const syncClasses = ["authentication__sync"];
+  const syncErrMessageClasses = ["authentication__sync-error-message"];
 
   if (syncAnimation) {
     syncClasses.push("sync-process");
@@ -266,7 +266,7 @@ export default function Sync({
       <div className={syncErrMessageClasses.join(" ")}>
         Sync failed, please check your internet connection or try again later
       </div>
-      <VscSync className="categories__auth-icon" onClick={syncData} />
+      <VscSync className="authentication__auth-icon" onClick={syncData} />
     </div>
   );
 }

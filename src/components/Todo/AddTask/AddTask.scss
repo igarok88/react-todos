@@ -7,6 +7,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media (max-width: 1000px) {
+      padding: 5px;
+      margin-bottom: 15px;
+    }
   }
   &__input-add-task-btn {
     cursor: pointer;

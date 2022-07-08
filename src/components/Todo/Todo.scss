@@ -1,13 +1,14 @@
 .todo {
-  max-width: 750px;
+  transition: all ease 0.5s;
   width: 100%;
   padding: 35px 5px 35px 35px;
   overflow: auto;
   background-color: #3450a1;
-  // border-radius: 20px;
-  // margin: 10px;
+  @media (max-width: 1000px) {
+    padding: 10px 5px 10px 10px;
+  }
+
   &__category-title-wrapper {
-    // max-width: 750px;
     font-size: 22px;
     padding: 15px;
     margin: 15px;
@@ -20,11 +21,21 @@
       overflow: hidden; /* Обрезаем всё за пределами блока */
       text-overflow: ellipsis; /* Добавляем многоточие */
     }
+    @media (max-width: 1000px) {
+      padding: 5px;
+      margin-top: 0;
+    }
   }
   &__category-title {
     margin-bottom: 25px;
     font-size: 32px;
     font-family: "Montserrat-Bold", serif;
+    @media (max-width: 1000px) {
+      margin-bottom: 10px;
+    }
+    @media (max-width: 600px) {
+      font-size: 26px;
+    }
   }
   &__category-btns {
     display: flex;
@@ -32,11 +43,14 @@
   }
   &__category-edit {
     cursor: pointer;
-    margin: 20px;
+    margin: 10px;
     margin-top: 0px;
     transition: all 0.5s ease;
     &:hover {
       color: #eaecf1;
+    }
+    @media (max-width: 600px) {
+      font-size: 18px;
     }
   }
   &__category-delete-btn {
@@ -45,6 +59,9 @@
     &:hover {
       color: #eaecf1;
     }
+    @media (max-width: 600px) {
+      font-size: 18px;
+    }
   }
   &__no-tasks {
     font-size: 32px;
@@ -52,6 +69,5 @@
     margin: 15px;
     color: #eaecf1;
     font-family: "Montserrat-Bold", serif;
-    // text-align: center;
   }
 }
