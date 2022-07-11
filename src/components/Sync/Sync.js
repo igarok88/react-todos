@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 
+import { isEqual } from "../../func/func";
 import { ref, set, child, get, once } from "firebase/database";
 import { db } from "../../firebase/firebaseConfig";
 
@@ -22,7 +23,7 @@ export default function Sync({
 }) {
   const [syncProcess, setSyncProcess] = useState(false);
   const [syncSuccess, setSyncSuccess] = useState(false);
-  const [syncError, setSyncError] = useState(true);
+  const [syncError, setSyncError] = useState(false);
 
   const [syncAnimation, setSyncAnimation] = useState(false);
   console.log("syncProcess", syncProcess);
@@ -75,14 +76,21 @@ export default function Sync({
         get(child(ref(db), userData.uid))
           .then((snapshot) => {
             console.log("data writed", snapshot.val());
-            //ждем окончания анимации
-            setSyncProcess(false);
+
+            const dataVerification = isEqual(snapshot.val(), {
+              categoryList,
+              deletedCategoryList,
+              deletedTodoList,
+              todoList,
+            });
+
+            setSyncProcess(!dataVerification);
 
             timeFinishSyncProcess = +new Date();
 
             setTimeout(() => {
-              setSyncAnimation(false);
-              setSyncSuccess(true);
+              setSyncAnimation(!dataVerification);
+              setSyncSuccess(dataVerification);
             }, timeForAnimation(timeFinishSyncProcess - timeStartSyncProcess));
           })
           .catch((error) => {

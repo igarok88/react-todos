@@ -10,7 +10,8 @@
   justify-content: flex-start;
   align-items: stretch;
   align-content: flex-start;
-  transition: all ease 0.5s;
+  transition: all linear 0.3s;
+
   @media (max-width: 1000px) {
     width: 260px;
   }
@@ -21,7 +22,7 @@
   &__menu-arrow-btn {
     position: absolute;
     top: 19px;
-    right: 15px;
+    right: 14px;
     cursor: pointer;
     font-size: 32px;
     height: 35px;
@@ -30,8 +31,8 @@
     justify-content: center;
     align-items: center;
     transform: rotate(180deg);
-    transition: all 0.5s ease;
-    border: 1px solid white;
+    transition: all linear 0.3s;
+    // border: 1px solid white;
     border-radius: 50%;
     &:hover {
       box-shadow: inset 0px 0px 15px 0px #3e5497;

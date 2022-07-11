@@ -1,67 +1,71 @@
 .categories {
-  &__add {
-    position: relative;
-  }
   &__add-wrapper {
-    transition: all ease 0.5s;
+    position: relative;
     cursor: pointer;
-    margin: 0 15px 15px;
+    margin: 15px;
     padding: 15px;
-    padding-left: 14px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    font-size: 15px;
-    color: darken($color: #fcfcfd, $amount: 30);
     border-radius: 10px;
+    transition: all linear 0.3s;
 
     &:hover {
       box-shadow: 0px 0px 15px 0px #3e5497;
     }
   }
   &.show-small &__add-wrapper {
-    transition: all ease 0.5s;
-    margin: 0;
-    padding: 6px 0px;
     justify-content: center;
+    padding: 6px;
+    margin: 13px 0px;
     &:hover {
       box-shadow: inset 0px 0px 15px 0px #3e5497;
     }
   }
+  &__add-title {
+    display: flex;
+    overflow: hidden;
+  }
   &__add-icon {
-    transition: all ease 0.5s;
+    transform: rotate(45deg);
+    transition: all linear 0.3s;
+    flex-shrink: 0;
     width: 18px;
     height: 18px;
+    border-radius: 50%;
     margin-right: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 28px;
-    transform: rotate(45deg);
-    color: #fcfcfd;
   }
   &.show-small &__add-icon {
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
+    font-size: 36px;
     margin: 0;
+    border-radius: 8px;
   }
 
-  &__add-title {
-    transition: all ease 0.5s;
+  &__add-name {
+    transition: all linear 0.3s;
     opacity: 1;
     visibility: visible;
-    color: #fcfcfd;
+    width: 150px;
     font-size: 15px;
     font-family: "Roboto-Regular";
     white-space: nowrap; /* Текст не переносится */
     overflow: hidden; /* Обрезаем всё за пределами блока */
-    // text-overflow: ellipsis; /* Добавляем многоточие */
+    text-overflow: ellipsis; /* Добавляем многоточие */
   }
-  &.show-small &__add-title {
-    transition: all ease 0.5s;
+  &.show-small &__add-name {
+    transition: all linear 0.3s;
     font-size: 25px;
     opacity: 0;
     visibility: hidden;
-    width: 0;
+    overflow: hidden;
+    margin-left: -34px;
+    width: 34px;
   }
   &__add-popup-backgroud {
     backdrop-filter: blur(2px);
@@ -72,12 +76,11 @@
     right: 0;
     z-index: 11;
     width: 100vw;
-    // height: 100%;
     overflow: hidden;
     background-color: rgba(0, 0, 0, 0.3);
   }
   &__add-popup-window {
-    z-index: 11;
+    z-index: 12;
     position: absolute;
     left: 13px;
     top: 60px;
@@ -117,7 +120,7 @@
     display: flex;
     margin: 5px;
     border-radius: 50%;
-    transition: all 0.5s ease;
+    transition: all linear 0.3s;
     &.active {
       box-shadow: 0px 0px 10px 3px #041955;
     }
@@ -138,7 +141,7 @@
     padding: 10px;
     border-radius: 10px;
     border: 1px solid transparent;
-    transition: all 0.5s ease;
+    transition: all linear 0.3s;
     &:hover {
       background-color: lighten($color: #183588, $amount: 20);
       border: 1px solid #eaecf1;
@@ -159,7 +162,7 @@
     align-items: center;
     justify-content: center;
     font-size: 20px;
-    transition: all 0.5s ease;
+    transition: all linear 0.3s;
     &:hover {
       color: #183588;
     }

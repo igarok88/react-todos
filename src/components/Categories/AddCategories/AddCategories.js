@@ -34,48 +34,49 @@ export default function AddCategories({
 
   return (
     <>
-      <div className="categories__add">
-        <div
-          className="categories__add-wrapper"
-          onClick={() => setShowPopup(true)}
-        >
+      <div
+        className="categories__add-wrapper"
+        onClick={() => setShowPopup(true)}
+      >
+        <div className="categories__add-title">
           <div className="categories__add-icon">
             <MdOutlineClose />
           </div>
-          <div className="categories__add-title">Add Categories</div>
+          <div className="categories__add-name">Add Categories</div>
         </div>
-        {showPopup && (
-          <>
-            <div className="categories__add-popup-window">
-              <input
-                onChange={(e) => setInputValue(e.target.value)}
-                value={inputValue}
-                type="text"
-                placeholder="Name categories"
-                className="categories__add-input"
-              />
-              <div className="categories__add-colors">
-                {colors.map((color) => {
-                  return (
-                    <div
-                      key={color.id}
-                      onClick={() => setColorId(color.id)}
-                      className={`categories__add-color bg--${color.name} 
-                    ${color.id === colorId && "active"}`}
-                    ></div>
-                  );
-                })}
-              </div>
-              <div className="categories__add-btn" onClick={addСategory}>
-                Add
-              </div>
-              <div className="categories__add-close-btn" onClick={closePopup}>
-                <MdOutlineClose />
-              </div>
-            </div>
-          </>
-        )}
       </div>
+      {showPopup && (
+        <>
+          <div className="categories__add-popup-window">
+            <input
+              onChange={(e) => setInputValue(e.target.value)}
+              value={inputValue}
+              type="text"
+              placeholder="Name categories"
+              className="categories__add-input"
+            />
+            <div className="categories__add-colors">
+              {colors.map((color) => {
+                return (
+                  <div
+                    key={color.id}
+                    onClick={() => setColorId(color.id)}
+                    className={`categories__add-color bg--${color.name} 
+                    ${color.id === colorId && "active"}`}
+                  ></div>
+                );
+              })}
+            </div>
+            <div className="categories__add-btn" onClick={addСategory}>
+              Add
+            </div>
+            <div className="categories__add-close-btn" onClick={closePopup}>
+              <MdOutlineClose />
+            </div>
+          </div>
+        </>
+      )}
+
       {showPopup && (
         <div
           className="categories__add-popup-backgroud"
