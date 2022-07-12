@@ -15,6 +15,7 @@ import {
 } from "react-icons/md";
 import { VscSync } from "react-icons/vsc";
 import { MdOutlineClose } from "react-icons/md";
+import { FcGoogle } from "react-icons/fc";
 import Sync from "../Sync/Sync";
 import "./Auth.scss";
 
@@ -30,8 +31,6 @@ export default function Auth({
   deletedCategoryList,
   setDeletedCategoryList,
 }) {
-  const loginArrowBtn = useRef(null);
-  const loginAuthRef = useRef(null);
   const authSyncWrapperRef = useRef(null);
 
   const [login, setLogin] = useState(false);
@@ -65,20 +64,9 @@ export default function Auth({
   };
   const toggleShowLogin = () => {
     setShowLogin(!showLogin);
-    const loginBtn = loginArrowBtn.current;
-    const loginAuth = loginAuthRef.current;
+
     const authSyncWrapper = authSyncWrapperRef.current;
-    // if (showLogin) {
-    //   loginBtn.classList.remove("hide");
-    //   loginAuth.classList.remove("hide");
-    //   loginBtn.classList.add("show");
-    //   loginAuth.classList.add("show");
-    // } else {
-    //   loginBtn.classList.remove("show");
-    //   loginAuth.classList.remove("show");
-    //   loginBtn.classList.add("hide");
-    //   loginAuth.classList.add("hide");
-    // }
+
     if (showLogin) {
       authSyncWrapper.classList.remove("hide");
       authSyncWrapper.classList.add("show");
@@ -92,7 +80,7 @@ export default function Auth({
     <div className="authentication" ref={authSyncWrapperRef}>
       <div className="authentication__auth-sync">
         {login ? (
-          <div className="authentication__auth-sign" ref={loginAuthRef}>
+          <div className="authentication__auth-sign">
             <Sync
               userData={userData}
               todoList={todoList}
@@ -115,18 +103,16 @@ export default function Auth({
             )}
 
             <MdOutlineLogout
+              title="Log out"
               className="authentication__auth-icon"
               onClick={singOut}
             />
           </div>
         ) : (
-          <div
-            className="authentication__auth-sign"
-            onClick={signInWithGoogle}
-            ref={loginAuthRef}
-          >
+          <div className="authentication__auth-sign" onClick={signInWithGoogle}>
+            <FcGoogle className="authentication__auth-icon authentication__auth-icon--google" />
             <div className="authentication__auth-title">Sign in for sync</div>
-            <MdOutlineLogin className="authentication__auth-icon" />
+            {/* <MdOutlineLogin className="authentication__auth-icon" /> */}
           </div>
         )}
       </div>{" "}
@@ -134,7 +120,6 @@ export default function Auth({
         <div
           className="authentication__auth-show-btn"
           onClick={toggleShowLogin}
-          ref={loginArrowBtn}
         >
           <VscSync />
         </div>
@@ -142,7 +127,6 @@ export default function Auth({
         <div
           className="authentication__auth-show-btn"
           onClick={toggleShowLogin}
-          ref={loginArrowBtn}
         >
           <MdOutlineClose />
         </div>

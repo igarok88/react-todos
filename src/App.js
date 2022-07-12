@@ -17,10 +17,29 @@ export default function App() {
   const [inputValue, setInputValue] = useState("");
 
   const [editDate, setEditDate] = useState(null);
+  const [showSync, setShowSync] = useState(false);
 
-  // console.log("todoList", todoList);
+  console.log("showSync", showSync);
   // console.log("categoryList", categoryList);
   // console.log("deletedCategoryList", deletedCategoryList);
+
+  const onInternet = async () => {
+    try {
+      let response = await fetch("http://localhost:3000/favicon.ico");
+      if (response.ok) {
+        setShowSync(true);
+      } else {
+        setShowSync(false);
+      }
+    } catch {
+      setShowSync(false);
+    }
+  };
+
+  onInternet();
+  setInterval(() => {
+    onInternet();
+  }, 60000);
 
   return (
     <div className="App">
@@ -55,18 +74,20 @@ export default function App() {
         listId={listId}
         setListId={setListId}
       />{" "}
-      <Auth
-        todoList={todoList}
-        setTodoList={setTodoList}
-        categoryList={categoryList}
-        setCategoryList={setCategoryList}
-        editDate={editDate}
-        setEditDate={setEditDate}
-        deletedTodoList={deletedTodoList}
-        setDeletedTodoList={setDeletedTodoList}
-        deletedCategoryList={deletedCategoryList}
-        setDeletedCategoryList={setDeletedCategoryList}
-      />
+      {showSync && (
+        <Auth
+          todoList={todoList}
+          setTodoList={setTodoList}
+          categoryList={categoryList}
+          setCategoryList={setCategoryList}
+          editDate={editDate}
+          setEditDate={setEditDate}
+          deletedTodoList={deletedTodoList}
+          setDeletedTodoList={setDeletedTodoList}
+          deletedCategoryList={deletedCategoryList}
+          setDeletedCategoryList={setDeletedCategoryList}
+        />
+      )}
     </div>
   );
 }

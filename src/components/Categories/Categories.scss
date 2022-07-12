@@ -11,18 +11,37 @@
   align-items: stretch;
   align-content: flex-start;
   transition: all linear 0.3s;
-
+  z-index: 12;
+  &.show-small {
+    width: 65px;
+  }
   @media (max-width: 1000px) {
     width: 260px;
   }
-  &.show-small {
-    width: 65px;
+  @media (max-width: 550px) {
+    body {
+      background-color: #041955;
+    }
+    & + .todo {
+      width: 0;
+      opacity: 0;
+      visibility: hidden;
+      padding: 0;
+    }
+    &.show-small + .todo {
+      width: 100%;
+      opacity: 1;
+      visibility: visible;
+    }
+    & {
+      width: 100%;
+    }
   }
 
   &__menu-arrow-btn {
     position: absolute;
     top: 19px;
-    right: 14px;
+    right: 12px;
     cursor: pointer;
     font-size: 32px;
     height: 35px;

@@ -35,6 +35,12 @@ export default function Categories({
     resizeWindow();
   });
 
+  useEffect(() => {
+    if (document.documentElement.clientWidth < 750) {
+      categoriesRef.current.classList.add("show-small");
+    }
+  }, [listId]);
+
   const resizeWindow = () => {
     window.addEventListener("resize", () => {
       const element = categoriesItemsRef.current;
@@ -49,6 +55,7 @@ export default function Categories({
       }
     });
   };
+
   const toggleMenu = () => {
     categoriesRef.current.classList.toggle("show-small");
   };

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { isEqual } from "../../func/func";
+import { isEqual, ifEmptyServerData } from "../../func/func";
 import { ref, set, child, get, once } from "firebase/database";
 import { db } from "../../firebase/firebaseConfig";
 
@@ -55,6 +55,9 @@ export default function Sync({
       .catch((error) => {
         console.error(error);
         readUserData();
+        setTimeout(() => {
+          console.log("время ожидания истекло");
+        }, 10000);
       });
     return;
   };
@@ -77,50 +80,62 @@ export default function Sync({
           .then((snapshot) => {
             console.log("data writed", snapshot.val());
 
-            const dataVerification = isEqual(snapshot.val(), {
+            const server = ifEmptyServerData(snapshot.val());
+
+            const dataVerification = isEqual(server, {
               categoryList,
               deletedCategoryList,
               deletedTodoList,
               todoList,
             });
 
-            setSyncProcess(!dataVerification);
+            if (dataVerification) {
+              setSyncProcess(false);
 
-            timeFinishSyncProcess = +new Date();
+              timeFinishSyncProcess = +new Date();
 
-            setTimeout(() => {
-              setSyncAnimation(!dataVerification);
-              setSyncSuccess(dataVerification);
-            }, timeForAnimation(timeFinishSyncProcess - timeStartSyncProcess));
+              setTimeout(() => {
+                setSyncAnimation(false);
+                setSyncSuccess(dataVerification);
+              }, timeForAnimation(timeFinishSyncProcess - timeStartSyncProcess));
+            } else {
+              throw new Error(
+                " Sync failed, please check your internet connection or try again later"
+              );
+            }
           })
           .catch((error) => {
             console.error(error);
             setSyncError(true);
+            setSyncAnimation(false);
+            setSyncProcess(false);
           });
       })
       .catch((error) => {
-        console.error(error);
-        setSyncError(true);
+        // console.error(error);
+        // setSyncError(true);
       });
   };
 
   const getServerData = (server) => {
-    const compareServerAndLocalData = (server, local) => {
-      if (!server.todoList) {
-        server.todoList = [];
-      }
+    const compareServerAndLocalData = (serverData, local) => {
+      const server = ifEmptyServerData(serverData);
 
-      if (!server.deletedTodoList) {
-        server.deletedTodoList = [];
-      }
+      // if (!server.todoList) {
+      //   server.todoList = [];
+      // }
 
-      if (!server.categoryList) {
-        server.categoryList = [];
-      }
+      // if (!server.deletedTodoList) {
+      //   server.deletedTodoList = [];
+      // }
 
-      if (!server.deletedCategoryList) {
-        server.deletedCategoryList = [];
-      }
+      // if (!server.categoryList) {
+      //   server.categoryList = [];
+      // }
+
+      // if (!server.deletedCategoryList) {
+      //   server.deletedCategoryList = [];
+      // }
 
       let {
         todoList: serverTodoList,
@@ -267,14 +282,19 @@ export default function Sync({
       setSyncError(false);
     }, 15000);
   }
-  // console.log(syncRef.current);
 
   return (
-    <div ref={syncRef} className={syncClasses.join(" ")}>
+    <>
       <div className={syncErrMessageClasses.join(" ")}>
         Sync failed, please check your internet connection or try again later
       </div>
-      <VscSync className="authentication__auth-icon" onClick={syncData} />
-    </div>
+      <div ref={syncRef} className={syncClasses.join(" ")}>
+        <VscSync
+          className="authentication__auth-icon"
+          onClick={syncData}
+          title="Sync Data"
+        />
+      </div>
+    </>
   );
 }

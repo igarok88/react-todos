@@ -8,6 +8,11 @@
 body {
   background-color: #97b5fe;
 }
+@media (max-width: 550px) {
+  body {
+    background-color: #041955;
+  }
+}
 // @import "./normalize.css";
 
 //scrollbar

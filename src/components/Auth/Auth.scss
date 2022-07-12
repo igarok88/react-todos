@@ -59,11 +59,12 @@
     visibility: hidden;
   }
   &__auth-sign {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     animation-duration: 0.3s;
-    padding-left: 15px;
+    padding-left: 7px;
   }
   .show &__auth-sign {
     bottom: 0;
@@ -85,9 +86,15 @@
     height: 20px;
     cursor: pointer;
   }
+  &__auth-icon--google {
+    width: 21px;
+    height: 21px;
+    background-color: #fff;
+    border-radius: 5px;
+  }
   &__sync {
     transition: all ease 2s;
-    position: relative;
+    // position: relative;
   }
   &__sync-error-message {
     display: none;
@@ -95,7 +102,7 @@
     z-index: 11;
     width: 210px;
     top: -74px;
-    left: -15px;
+    left: 0px;
     text-align: center;
     color: red;
     font-weight: bold;

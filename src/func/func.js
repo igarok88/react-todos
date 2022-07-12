@@ -57,3 +57,22 @@ export const timeForAnimation = (leadTime) => {
 
   return timeAnimation - leadTime;
 };
+
+export const ifEmptyServerData = (server) => {
+  if (!server.todoList) {
+    server.todoList = [];
+  }
+
+  if (!server.deletedTodoList) {
+    server.deletedTodoList = [];
+  }
+
+  if (!server.categoryList) {
+    server.categoryList = [];
+  }
+
+  if (!server.deletedCategoryList) {
+    server.deletedCategoryList = [];
+  }
+  return server;
+};
