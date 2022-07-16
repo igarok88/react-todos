@@ -74,5 +74,11 @@ export const ifEmptyServerData = (server) => {
   if (!server.deletedCategoryList) {
     server.deletedCategoryList = [];
   }
+  if (server === null) {
+    server.todoList = [];
+    server.deletedTodoList = [];
+    server.categoryList = [];
+    server.deletedCategoryList = [];
+  }
   return server;
 };

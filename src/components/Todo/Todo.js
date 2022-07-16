@@ -6,7 +6,6 @@ import { ImCross } from "react-icons/im";
 import { isEqual, compensateScroll } from "../../func/func";
 import AddTask from "./AddTask/AddTask";
 import Task from "./Task/Task";
-import Auth from "../Auth/Auth";
 import "./Todo.scss";
 
 export default function Todo({
@@ -20,8 +19,6 @@ export default function Todo({
   setDeletedCategoryList,
   listId,
   setListId,
-  editDate,
-  setEditDate,
 }) {
   const todoListRef = useRef(null);
   const categoryNameRef = useRef([]);
@@ -48,7 +45,6 @@ export default function Todo({
     const deletedTask = [...todoList].find((todo) => todo.id === id);
     setDeletedTodoList([...deletedTodoList, deletedTask.id]);
     setTodoList(newTodoList);
-    // setEditDate(+new Date());
   };
 
   const editCategory = (categoryDomElement) => {
@@ -138,18 +134,11 @@ export default function Todo({
                             isChecked={todo.isChecked}
                             todoList={todoList}
                             setTodoList={setTodoList}
-                            editDate={editDate}
-                            setEditDate={setEditDate}
                           />
                         )
                       );
                     })}
-                    <AddTask
-                      setTodoList={setTodoList}
-                      listId={category.id}
-                      editDate={editDate}
-                      setEditDate={setEditDate}
-                    />
+                    <AddTask setTodoList={setTodoList} listId={category.id} />
                   </div>
                 );
               })}
@@ -161,7 +150,7 @@ export default function Todo({
                   category.id === listId && (
                     <div
                       className="todo__category-title-wrapper"
-                      key={Math.round()}
+                      key={category.id}
                     >
                       <h2
                         id={category.id}
@@ -192,7 +181,7 @@ export default function Todo({
               })}
               {todoList.map((todo) => {
                 return (
-                  <div key={Math.random()}>
+                  <div key={todo.id}>
                     {todo.listId === listId && (
                       <Task
                         removeTask={removeTask}
@@ -203,19 +192,12 @@ export default function Todo({
                         isChecked={todo.isChecked}
                         todoList={todoList}
                         setTodoList={setTodoList}
-                        editDate={editDate}
-                        setEditDate={setEditDate}
                       />
                     )}
                   </div>
                 );
               })}
-              <AddTask
-                setTodoList={setTodoList}
-                listId={listId}
-                editDate={editDate}
-                setEditDate={setEditDate}
-              />
+              <AddTask setTodoList={setTodoList} listId={listId} />
             </>
           )}
         </>

@@ -52,13 +52,13 @@
   "colors": [
     {
       "id": 1,
-      "name": "green",
-      "color": "#34AF86"
+      "name": "orange",
+      "color": "#FF6E60"
     },
     {
       "id": 2,
-      "name": "gray",
-      "color": "#CFCFCF"
+      "name": "green",
+      "color": "#34AF86"
     },
     {
       "id": 3,
@@ -82,8 +82,8 @@
     },
     {
       "id": 7,
-      "name": "orange",
-      "color": "#FF6E60"
+      "name": "gray",
+      "color": "#CFCFCF"
     }
   ]
 }

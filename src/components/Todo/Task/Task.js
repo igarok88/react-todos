@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, memo } from "react";
 
 import { ImCross } from "react-icons/im";
 import { BsCheck2 } from "react-icons/bs";
@@ -6,7 +6,7 @@ import { BsCheck2 } from "react-icons/bs";
 import { isEqual } from "../../../func/func";
 import "./Task.scss";
 
-export default function Task({
+function Task({
   id,
   description,
   isChecked,
@@ -14,8 +14,6 @@ export default function Task({
   removeTask,
   todoList,
   setTodoList,
-  editDate,
-  setEditDate,
 }) {
   const taskDescription = useRef(null);
 
@@ -69,3 +67,4 @@ export default function Task({
     </>
   );
 }
+export default memo(Task);

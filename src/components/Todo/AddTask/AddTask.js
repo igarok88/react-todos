@@ -1,14 +1,10 @@
+import { memo } from "react";
 import { useState } from "react";
 import { MdOutlineClose } from "react-icons/md";
 
 import "./AddTask.scss";
 
-export default function AddTask({
-  setTodoList,
-  listId,
-  editDate,
-  setEditDate,
-}) {
+function AddTask({ setTodoList, listId }) {
   const [description, setDescription] = useState("");
   const addTask = (description) => {
     if (description) {
@@ -45,3 +41,4 @@ export default function AddTask({
     </div>
   );
 }
+export default memo(AddTask);

@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, memo } from "react";
 
 import { auth } from "../../firebase/firebaseConfig";
 import {
@@ -8,24 +8,17 @@ import {
   signOut,
 } from "firebase/auth";
 
-import {
-  MdOutlineLogout,
-  MdOutlineLogin,
-  MdKeyboardArrowRight,
-} from "react-icons/md";
+import { MdOutlineLogout, MdOutlineClose } from "react-icons/md";
 import { VscSync } from "react-icons/vsc";
-import { MdOutlineClose } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
 import Sync from "../Sync/Sync";
 import "./Auth.scss";
 
-export default function Auth({
+function Auth({
   todoList,
   setTodoList,
   categoryList,
   setCategoryList,
-  editDate,
-  setEditDate,
   deletedTodoList,
   setDeletedTodoList,
   deletedCategoryList,
@@ -87,8 +80,6 @@ export default function Auth({
               setTodoList={setTodoList}
               categoryList={categoryList}
               setCategoryList={setCategoryList}
-              editDate={editDate}
-              setEditDate={setEditDate}
               deletedTodoList={deletedTodoList}
               setDeletedTodoList={setDeletedTodoList}
               deletedCategoryList={deletedCategoryList}
@@ -134,3 +125,5 @@ export default function Auth({
     </div>
   );
 }
+
+export default memo(Auth);

@@ -14,80 +14,70 @@ export default function App() {
   const [todoList, setTodoList] = useState(DB.tasks);
   const [deletedTodoList, setDeletedTodoList] = useState([]);
   const [deletedCategoryList, setDeletedCategoryList] = useState([]);
-  const [inputValue, setInputValue] = useState("");
 
-  const [editDate, setEditDate] = useState(null);
-  const [showSync, setShowSync] = useState(false);
-
-  console.log("showSync", showSync);
   // console.log("categoryList", categoryList);
   // console.log("deletedCategoryList", deletedCategoryList);
 
-  const onInternet = async () => {
-    try {
-      let response = await fetch("http://localhost:3000/favicon.ico");
-      if (response.ok) {
-        setShowSync(true);
-      } else {
-        setShowSync(false);
-      }
-    } catch {
-      setShowSync(false);
-    }
-  };
+  // useEffect(() => {
+  //   onInternet();
+  // }, [categoryList, todoList]);
 
-  onInternet();
-  setInterval(() => {
-    onInternet();
-  }, 60000);
+  // const onInternet = async () => {
+  //   console.log("call onInternet");
+  //   try {
+  //     let response = await fetch("http://localhost:3000/favicon.ico");
+  //     if (response.ok) {
+  //       console.log("response.ok");
+
+  //       if (showSync === true) {
+  //         return;
+  //       } else {
+  //         return setShowSync(true);
+  //       }
+  //     } else {
+  //       return setShowSync(false);
+  //     }
+  //   } catch {
+  //     return setShowSync(false);
+  //   }
+  // };
+  // const availabilityInternet = setInterval(() => {
+  //   onInternet();
+  // }, 5000);
 
   return (
     <div className="App">
       <Categories
-        todoList={todoList}
-        setTodoList={setTodoList}
-        categoryList={categoryList}
-        setCategoryList={setCategoryList}
-        editDate={editDate}
-        setEditDate={setEditDate}
-        deletedTodoList={deletedTodoList}
-        setDeletedTodoList={setDeletedTodoList}
-        deletedCategoryList={deletedCategoryList}
-        setDeletedCategoryList={setDeletedCategoryList}
-        colors={DB.colors}
         listId={listId}
         setListId={setListId}
-        inputValue={inputValue}
-        setInputValue={setInputValue}
+        categoryList={categoryList}
+        setCategoryList={setCategoryList}
+        todoList={todoList}
       />
       <Todo
-        todoList={todoList}
-        setTodoList={setTodoList}
-        categoryList={categoryList}
-        setCategoryList={setCategoryList}
-        editDate={editDate}
-        setEditDate={setEditDate}
-        deletedTodoList={deletedTodoList}
-        setDeletedTodoList={setDeletedTodoList}
-        deletedCategoryList={deletedCategoryList}
-        setDeletedCategoryList={setDeletedCategoryList}
         listId={listId}
         setListId={setListId}
+        categoryList={categoryList}
+        setCategoryList={setCategoryList}
+        deletedCategoryList={deletedCategoryList}
+        setDeletedCategoryList={setDeletedCategoryList}
+        todoList={todoList}
+        setTodoList={setTodoList}
+        deletedTodoList={deletedTodoList}
+        setDeletedTodoList={setDeletedTodoList}
       />{" "}
-      {showSync && (
+      {
         <Auth
-          todoList={todoList}
-          setTodoList={setTodoList}
           categoryList={categoryList}
           setCategoryList={setCategoryList}
-          editDate={editDate}
-          setEditDate={setEditDate}
-          deletedTodoList={deletedTodoList}
-          setDeletedTodoList={setDeletedTodoList}
           deletedCategoryList={deletedCategoryList}
           setDeletedCategoryList={setDeletedCategoryList}
+          todoList={todoList}
+          setTodoList={setTodoList}
+          deletedTodoList={deletedTodoList}
+          setDeletedTodoList={setDeletedTodoList}
         />
-      )}
+      }
     </div>
   );
 }

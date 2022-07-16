@@ -20,7 +20,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    transform: rotate(90deg);
+    transform: rotate(-180deg);
     animation-duration: 0.3s;
     border-radius: 50%;
     background-color: rgb(50, 18, 124);
@@ -33,7 +33,7 @@
     transform: rotate(0);
   }
   .hide &__auth-show-btn {
-    transform: rotate(180deg);
+    transform: rotate(-180deg);
   }
 
   &__auth-sync {
@@ -134,7 +134,7 @@
   }
 
   &__auth-avatar {
-    margin: 0 15px;
+    margin: 0 20px;
     width: 30px;
     height: 30px;
     border-radius: 5px;

@@ -6,7 +6,6 @@
   background-color: #3450a1;
   @media (max-width: 1000px) {
     padding: 10px 5px 10px 10px;
-    // width: 0;
   }
 
   &__category-title-wrapper {
@@ -24,7 +23,7 @@
     }
     @media (max-width: 1000px) {
       padding: 5px;
-      margin-top: 5px;
+      margin-top: 0px;
     }
   }
   &__category-title {
@@ -65,10 +64,15 @@
     }
   }
   &__no-tasks {
-    font-size: 32px;
+    font-size: 40px;
     padding: 15px;
     margin: 15px;
+    margin-top: 35px;
     color: #eaecf1;
     font-family: "Montserrat-Bold", serif;
+    @media (max-width: 550px) {
+      font-size: 28px;
+      margin-top: 45px;
+    }
   }
 }

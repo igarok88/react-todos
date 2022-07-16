@@ -1,11 +1,12 @@
+import { memo } from "react";
 import "./CategoriesItem.scss";
 
-export default function CategoriesItem({
+function CategoriesItem({
+  setListId,
   todoList,
   icon,
   id,
   name,
-  setListId,
   activeClass,
   colorCircle,
 }) {
@@ -22,11 +23,10 @@ export default function CategoriesItem({
     (todo) => todo.listId === id && todo.isChecked === false
   ).length;
 
+  const makeActiveItem = () => setListId(id);
+
   return (
-    <div
-      className={categoriesItemClasses.join(" ")}
-      onClick={() => setListId(id)}
-    >
+    <div className={categoriesItemClasses.join(" ")} onClick={makeActiveItem}>
       <div className="categories__title">
         <div className={`categories__icon bg--${colorCircle}`}>
           {icon && icon}
@@ -44,3 +44,4 @@ export default function CategoriesItem({
     </div>
   );
 }
+export default memo(CategoriesItem);

@@ -1,12 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-import { isEqual, ifEmptyServerData } from "../../func/func";
-import { ref, set, child, get, once } from "firebase/database";
+import { isEqual, ifEmptyServerData, timeForAnimation } from "../../func/func";
+import { ref, set, child, get } from "firebase/database";
 import { db } from "../../firebase/firebaseConfig";
 
 import { VscSync } from "react-icons/vsc";
 import { useRef } from "react";
-import { timeForAnimation } from "../../func/func";
 
 export default function Sync({
   userData,
@@ -14,26 +13,18 @@ export default function Sync({
   setTodoList,
   categoryList,
   setCategoryList,
-  editDate,
-  setEditDate,
   deletedTodoList,
   setDeletedTodoList,
   deletedCategoryList,
   setDeletedCategoryList,
 }) {
-  const [syncProcess, setSyncProcess] = useState(false);
   const [syncSuccess, setSyncSuccess] = useState(false);
   const [syncError, setSyncError] = useState(false);
 
   const [syncAnimation, setSyncAnimation] = useState(false);
-  console.log("syncProcess", syncProcess);
-
-  console.log("syncAnimation", syncAnimation);
+  const [timeSyncAnimation, setTimeSyncAnimation] = useState(false);
 
   const syncRef = useRef(null);
-
-  let timeStartSyncProcess;
-  let timeFinishSyncProcess;
 
   const readUserData = () => {
     const dbRef = ref(db);
@@ -90,14 +81,7 @@ export default function Sync({
             });
 
             if (dataVerification) {
-              setSyncProcess(false);
-
-              timeFinishSyncProcess = +new Date();
-
-              setTimeout(() => {
-                setSyncAnimation(false);
-                setSyncSuccess(dataVerification);
-              }, timeForAnimation(timeFinishSyncProcess - timeStartSyncProcess));
+              syncDone();
             } else {
               throw new Error(
                 " Sync failed, please check your internet connection or try again later"
@@ -108,34 +92,28 @@ export default function Sync({
             console.error(error);
             setSyncError(true);
             setSyncAnimation(false);
-            setSyncProcess(false);
           });
       })
       .catch((error) => {
-        // console.error(error);
-        // setSyncError(true);
+        console.error(error);
+        setSyncError(true);
       });
   };
 
   const getServerData = (server) => {
     const compareServerAndLocalData = (serverData, local) => {
+      console.log("serverData", serverData);
+      console.log("local", local);
+
+      if (isEqual(serverData, local)) {
+        syncDone();
+
+        console.log("isEqual(serverData, local)", isEqual(serverData, local));
+
+        return;
+      }
+
       const server = ifEmptyServerData(serverData);
-
-      // if (!server.todoList) {
-      //   server.todoList = [];
-      // }
-
-      // if (!server.deletedTodoList) {
-      //   server.deletedTodoList = [];
-      // }
-
-      // if (!server.categoryList) {
-      //   server.categoryList = [];
-      // }
-
-      // if (!server.deletedCategoryList) {
-      //   server.deletedCategoryList = [];
-      // }
 
       let {
         todoList: serverTodoList,
@@ -254,13 +232,21 @@ export default function Sync({
   };
 
   const syncData = () => {
-    timeStartSyncProcess = +new Date();
     console.log("start sync");
-    setSyncProcess(true);
+    setTimeSyncAnimation(+new Date());
     setSyncSuccess(false);
     setSyncAnimation(true);
 
     readUserData();
+  };
+
+  const syncDone = () => {
+    setTimeSyncAnimation((prev) => +new Date() - prev);
+
+    setTimeout(() => {
+      setSyncAnimation(false);
+      setSyncSuccess(true);
+    }, timeForAnimation(timeSyncAnimation));
   };
 
   const syncClasses = ["authentication__sync"];

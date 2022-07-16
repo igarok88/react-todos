@@ -5,28 +5,20 @@ import { RiBarChartHorizontalLine } from "react-icons/ri";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import CategoriesItem from "./CategoriesItem/CategoriesItem";
 import AddCategories from "./AddCategories/AddCategories";
-import Auth from "../Auth/Auth";
 import { getScrollWidth } from "../../func/func";
 
 import "./Categories.scss";
-import React from "react";
+
+import DB from "../../data/db.json";
+
+const colors = DB.colors;
 
 export default function Categories({
-  todoList,
-  setTodoList,
-  categoryList,
-  setCategoryList,
-  editDate,
-  setEditDate,
-  deletedTodoList,
-  setDeletedTodoList,
-  deletedCategoryList,
-  setDeletedCategoryList,
-  colors,
   listId,
   setListId,
-  inputValue,
-  setInputValue,
+  categoryList,
+  setCategoryList,
+  todoList,
 }) {
   const categoriesRef = useRef(null);
   const categoriesItemsRef = useRef(null);
@@ -42,8 +34,9 @@ export default function Categories({
   }, [listId]);
 
   const resizeWindow = () => {
+    const scrollWidth = getScrollWidth();
+    const element = categoriesItemsRef.current;
     window.addEventListener("resize", () => {
-      const element = categoriesItemsRef.current;
       var winHeight = element.clientHeight;
       var allDocHeight = element.scrollHeight;
 
@@ -51,7 +44,7 @@ export default function Categories({
         //появился скролл
         element.style.paddingRight = 0;
       } else {
-        element.style.paddingRight = getScrollWidth() + "px";
+        element.style.paddingRight = scrollWidth + "px";
       }
     });
   };
@@ -67,11 +60,9 @@ export default function Categories({
       </div>
       <div className="categories__static-items">
         <AddCategories
+          categoryList={categoryList}
           setCategoryList={setCategoryList}
           colors={colors}
-          categoryList={categoryList}
-          inputValue={inputValue}
-          setInputValue={setInputValue}
         />
         {categoryList && categoryList.length > 1 && (
           <CategoriesItem

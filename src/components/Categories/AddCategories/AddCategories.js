@@ -1,17 +1,21 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 
 import "./AddCategories.scss";
 import { MdOutlineClose } from "react-icons/md";
 
-export default function AddCategories({
-  colors,
-  categoryList,
-  setCategoryList,
-  inputValue,
-  setInputValue,
-}) {
+function AddCategories({ categoryList, setCategoryList, colors }) {
+  const [inputValue, setInputValue] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [colorId, setColorId] = useState(1);
+
+  const openPopup = () => {
+    setShowPopup(true);
+  };
+
+  const closePopup = () => {
+    setInputValue("");
+    setShowPopup(false);
+  };
 
   const addСategory = () => {
     if (inputValue) {
@@ -23,21 +27,20 @@ export default function AddCategories({
       };
       const newLists = [...categoryList, category];
       setCategoryList(newLists);
+      setColorId((colorId) => {
+        ++colorId;
+        if (colorId > 7) {
+          colorId = 1;
+        }
+        return colorId;
+      });
       closePopup();
     }
-  };
-  const closePopup = () => {
-    setInputValue("");
-    setColorId(1);
-    setShowPopup(false);
   };
 
   return (
     <>
-      <div
-        className="categories__add-wrapper"
-        onClick={() => setShowPopup(true)}
-      >
+      <div className="categories__add-wrapper" onClick={openPopup}>
         <div className="categories__add-title">
           <div className="categories__add-icon">
             <MdOutlineClose />
@@ -49,11 +52,13 @@ export default function AddCategories({
         <>
           <div className="categories__add-popup-window">
             <input
+              autoFocus
+              className="categories__add-input"
+              type="text"
+              placeholder="name the category"
               onChange={(e) => setInputValue(e.target.value)}
               value={inputValue}
-              type="text"
-              placeholder="Name categories"
-              className="categories__add-input"
+              onKeyPress={(e) => e.key === "Enter" && addСategory(inputValue)}
             />
             <div className="categories__add-colors">
               {colors.map((color) => {
@@ -86,3 +91,5 @@ export default function AddCategories({
     </>
   );
 }
+
+export default memo(AddCategories);
