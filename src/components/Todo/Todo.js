@@ -9,14 +9,14 @@ import Task from "./Task/Task";
 import "./Todo.scss";
 
 export default function Todo({
-  todoList,
-  setTodoList,
   categoryList,
   setCategoryList,
-  deletedTodoList,
-  setDeletedTodoList,
   deletedCategoryList,
   setDeletedCategoryList,
+  todoList,
+  setTodoList,
+  deletedTodoList,
+  setDeletedTodoList,
   listId,
   setListId,
 }) {
@@ -24,12 +24,11 @@ export default function Todo({
   const categoryNameRef = useRef([]);
 
   useEffect(() => {
-    resizeWindow();
-  });
-
-  const resizeWindow = () => {
-    window.addEventListener("resize", compensateScroll(todoListRef));
-  };
+    // window.addEventListener("resize", compensateScroll(todoListRef));
+  }, []);
+  useEffect(() => {
+    compensateScroll(todoListRef);
+  }, [listId]);
 
   const checkedTask = (id) => {
     const copy = [...todoList];

@@ -6,7 +6,7 @@ import { BsCheck2 } from "react-icons/bs";
 import { isEqual } from "../../../func/func";
 import "./Task.scss";
 
-function Task({
+export default memo(function Task({
   id,
   description,
   isChecked,
@@ -66,5 +66,4 @@ function Task({
       </div>
     </>
   );
-}
-export default memo(Task);
+});

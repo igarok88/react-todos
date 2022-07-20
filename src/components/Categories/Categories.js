@@ -5,7 +5,7 @@ import { RiBarChartHorizontalLine } from "react-icons/ri";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import CategoriesItem from "./CategoriesItem/CategoriesItem";
 import AddCategories from "./AddCategories/AddCategories";
-import { getScrollWidth } from "../../func/func";
+import { compensateScroll } from "../../func/func";
 
 import "./Categories.scss";
 
@@ -24,30 +24,16 @@ export default function Categories({
   const categoriesItemsRef = useRef(null);
 
   useEffect(() => {
-    resizeWindow();
-  });
+    window.addEventListener("resize", () => {
+      compensateScroll(categoriesItemsRef);
+    });
+  }, []);
 
   useEffect(() => {
     if (document.documentElement.clientWidth < 750) {
       categoriesRef.current.classList.add("show-small");
     }
   }, [listId]);
-
-  const resizeWindow = () => {
-    const scrollWidth = getScrollWidth();
-    const element = categoriesItemsRef.current;
-    window.addEventListener("resize", () => {
-      var winHeight = element.clientHeight;
-      var allDocHeight = element.scrollHeight;
-
-      if (allDocHeight > winHeight) {
-        //появился скролл
-        element.style.paddingRight = 0;
-      } else {
-        element.style.paddingRight = scrollWidth + "px";
-      }
-    });
-  };
 
   const toggleMenu = () => {
     categoriesRef.current.classList.toggle("show-small");

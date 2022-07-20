@@ -1,5 +1,4 @@
-import { memo } from "react";
-import { useState } from "react";
+import { useState, memo } from "react";
 import { MdOutlineClose } from "react-icons/md";
 
 import "./AddTask.scss";

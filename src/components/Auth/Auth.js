@@ -11,10 +11,10 @@ import {
 import { MdOutlineLogout, MdOutlineClose } from "react-icons/md";
 import { VscSync } from "react-icons/vsc";
 import { FcGoogle } from "react-icons/fc";
-import Sync from "../Sync/Sync";
+import Sync from "../Auth/Sync/Sync";
 import "./Auth.scss";
 
-function Auth({
+export default memo(function Auth({
   todoList,
   setTodoList,
   categoryList,
@@ -124,6 +124,4 @@ function Auth({
       )}
     </div>
   );
-}
-
-export default memo(Auth);
+});

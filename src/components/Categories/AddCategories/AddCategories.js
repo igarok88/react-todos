@@ -1,41 +1,16 @@
 import { useState, memo } from "react";
 
+import AddCategoriesPopup from "./AddCategoriesPopup/AddCategoriesPopup";
+
 import "./AddCategories.scss";
 import { MdOutlineClose } from "react-icons/md";
 
-function AddCategories({ categoryList, setCategoryList, colors }) {
-  const [inputValue, setInputValue] = useState("");
+export default memo(function AddCategories({ categoryList, setCategoryList }) {
   const [showPopup, setShowPopup] = useState(false);
   const [colorId, setColorId] = useState(1);
 
   const openPopup = () => {
     setShowPopup(true);
-  };
-
-  const closePopup = () => {
-    setInputValue("");
-    setShowPopup(false);
-  };
-
-  const addСategory = () => {
-    if (inputValue) {
-      const category = {
-        id: Math.random(),
-        name: inputValue,
-        colorId,
-        date: +new Date(),
-      };
-      const newLists = [...categoryList, category];
-      setCategoryList(newLists);
-      setColorId((colorId) => {
-        ++colorId;
-        if (colorId > 7) {
-          colorId = 1;
-        }
-        return colorId;
-      });
-      closePopup();
-    }
   };
 
   return (
@@ -49,47 +24,14 @@ function AddCategories({ categoryList, setCategoryList, colors }) {
         </div>
       </div>
       {showPopup && (
-        <>
-          <div className="categories__add-popup-window">
-            <input
-              autoFocus
-              className="categories__add-input"
-              type="text"
-              placeholder="name the category"
-              onChange={(e) => setInputValue(e.target.value)}
-              value={inputValue}
-              onKeyPress={(e) => e.key === "Enter" && addСategory(inputValue)}
-            />
-            <div className="categories__add-colors">
-              {colors.map((color) => {
-                return (
-                  <div
-                    key={color.id}
-                    onClick={() => setColorId(color.id)}
-                    className={`categories__add-color bg--${color.name} 
-                    ${color.id === colorId && "active"}`}
-                  ></div>
-                );
-              })}
-            </div>
-            <div className="categories__add-btn" onClick={addСategory}>
-              Add
-            </div>
-            <div className="categories__add-close-btn" onClick={closePopup}>
-              <MdOutlineClose />
-            </div>
-          </div>
-        </>
-      )}
-
-      {showPopup && (
-        <div
-          className="categories__add-popup-backgroud"
-          onClick={closePopup}
-        ></div>
+        <AddCategoriesPopup
+          categoryList={categoryList}
+          setCategoryList={setCategoryList}
+          setShowPopup={setShowPopup}
+          colorId={colorId}
+          setColorId={setColorId}
+        />
       )}
     </>
   );
-}
-
-export default memo(AddCategories);
+});

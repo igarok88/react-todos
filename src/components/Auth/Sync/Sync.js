@@ -1,8 +1,12 @@
 import { useState } from "react";
 
-import { isEqual, ifEmptyServerData, timeForAnimation } from "../../func/func";
+import {
+  isEqual,
+  ifEmptyServerData,
+  timeForAnimation,
+} from "../../../func/func";
 import { ref, set, child, get } from "firebase/database";
-import { db } from "../../firebase/firebaseConfig";
+import { db } from "../../../firebase/firebaseConfig";
 
 import { VscSync } from "react-icons/vsc";
 import { useRef } from "react";
