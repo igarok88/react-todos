@@ -15,16 +15,7 @@ import { FcGoogle } from "react-icons/fc";
 import Sync from "../Auth/Sync/Sync";
 import "./Auth.scss";
 
-export default memo(function Auth({
-  todoList,
-  setTodoList,
-  categoryList,
-  setCategoryList,
-  deletedTodoList,
-  setDeletedTodoList,
-  deletedCategoryList,
-  setDeletedCategoryList,
-}) {
+export default memo(function Auth({ getStateData }) {
   const authSyncWrapperRef = useRef(null);
 
   const [login, setLogin] = useState(false);
@@ -77,17 +68,7 @@ export default memo(function Auth({
       <div className="authentication__auth-sync">
         {login ? (
           <div className="authentication__auth-sign">
-            <Sync
-              userData={userData}
-              todoList={todoList}
-              setTodoList={setTodoList}
-              categoryList={categoryList}
-              setCategoryList={setCategoryList}
-              deletedTodoList={deletedTodoList}
-              setDeletedTodoList={setDeletedTodoList}
-              deletedCategoryList={deletedCategoryList}
-              setDeletedCategoryList={setDeletedCategoryList}
-            />
+            <Sync getStateData={getStateData} userData={userData} />
             {userData && (
               <img
                 className="authentication__auth-avatar"

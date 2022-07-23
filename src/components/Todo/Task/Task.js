@@ -3,50 +3,37 @@ import { useRef, memo } from "react";
 import { ImCross } from "react-icons/im";
 import { BsCheck2 } from "react-icons/bs";
 
-import { isEqual } from "../../../func/func";
 import "./Task.scss";
 
-export default memo(function Task({
-  id,
-  description,
-  isChecked,
+export default function Task({
+  editTaskDescription,
   checkedTask,
   removeTask,
-  todoList,
-  setTodoList,
+  todo,
 }) {
+  const { id, description, isChecked } = todo;
+
   const taskDescription = useRef(null);
+
+  const checkTask = () => {
+    checkedTask(id);
+  };
+  const editDescription = () => {
+    editTaskDescription(taskDescription.current, id);
+  };
+  const deleteTask = () => {
+    removeTask(id);
+  };
 
   const todoTaskClasses = ["todo__task"];
   if (isChecked) {
     todoTaskClasses.push("checked");
   }
 
-  const editTaskDescription = (taskDomElement) => {
-    const copy = JSON.parse(JSON.stringify(todoList));
-
-    copy.map((todo) => {
-      if (todo.id === id) {
-        todo.description = taskDomElement.innerText;
-      }
-      return todo;
-    });
-
-    if (!isEqual(todoList, copy)) {
-      copy.map((todo) => {
-        if (todo.id === id) {
-          todo.date = +new Date();
-        }
-        return todo;
-      });
-      setTodoList(copy);
-    }
-  };
-
   return (
     <>
       <div className="todo__task-wrapper">
-        <div className="todo__checkbox" onClick={() => checkedTask(id)}>
+        <div className="todo__checkbox" onClick={checkTask}>
           {isChecked && <BsCheck2 />}
         </div>
         <div
@@ -54,16 +41,13 @@ export default memo(function Task({
           contentEditable
           suppressContentEditableWarning={true}
           ref={taskDescription}
-          onBlur={() => editTaskDescription(taskDescription.current)}
+          onBlur={editDescription}
           className={todoTaskClasses.join(" ")}
         >
           {description}
         </div>
-        <ImCross
-          className="todo__delete-task-btn"
-          onClick={() => removeTask(id)}
-        />
+        <ImCross className="todo__delete-task-btn" onClick={deleteTask} />
       </div>
     </>
   );
-});
+}

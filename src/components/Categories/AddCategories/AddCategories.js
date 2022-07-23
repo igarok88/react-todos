@@ -5,7 +5,7 @@ import AddCategoriesPopup from "./AddCategoriesPopup/AddCategoriesPopup";
 import "./AddCategories.scss";
 import { MdOutlineClose } from "react-icons/md";
 
-export default memo(function AddCategories({ categoryList, setCategoryList }) {
+export default memo(function AddCategories({ setCategoryList }) {
   const [showPopup, setShowPopup] = useState(false);
   const [colorId, setColorId] = useState(1);
 
@@ -25,7 +25,6 @@ export default memo(function AddCategories({ categoryList, setCategoryList }) {
       </div>
       {showPopup && (
         <AddCategoriesPopup
-          categoryList={categoryList}
           setCategoryList={setCategoryList}
           setShowPopup={setShowPopup}
           colorId={colorId}

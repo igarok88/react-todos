@@ -16,11 +16,11 @@ import DB from "../../data/db.json";
 const colors = DB.colors;
 
 export default function Categories({
+  isChekedTasksLength,
   listId,
   setListId,
   categoryList,
   setCategoryList,
-  todoList,
 }) {
   const categoriesRef = useRef(null);
   const categoriesItemsRef = useRef(null);
@@ -52,18 +52,14 @@ export default function Categories({
         <MdKeyboardArrowRight />
       </div>
       <div className="categories__static-items">
-        <AddCategories
-          categoryList={categoryList}
-          setCategoryList={setCategoryList}
-          colors={colors}
-        />
+        <AddCategories setCategoryList={setCategoryList} />
         {categoryList && categoryList.length > 1 && (
           <Link to="/">
             <CategoriesItem
-              todoList={todoList}
+              isChekedTasksLength={isChekedTasksLength}
               id={"all"}
-              name={"Все задачи"}
               setListId={setListId}
+              name={"Все задачи"}
               activeClass={"all" === listId ? "active" : null}
               icon={<RiBarChartHorizontalLine />}
             />
@@ -78,11 +74,11 @@ export default function Categories({
           return (
             <Link to={list.name.toLowerCase()} key={list.id}>
               <CategoriesItem
-                todoList={todoList}
+                isChekedTasksLength={isChekedTasksLength}
                 // key={list.id}
                 id={list.id}
-                name={list.name}
                 setListId={setListId}
+                name={list.name}
                 activeClass={list.id === listId ? "active" : null}
                 colorCircle={list.color}
               />

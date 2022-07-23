@@ -18,6 +18,7 @@
     align-items: center;
     justify-content: space-between;
     h2 {
+      width: 100%;
       white-space: nowrap; /* Текст не переносится */
       overflow: hidden; /* Обрезаем всё за пределами блока */
       text-overflow: ellipsis; /* Добавляем многоточие */

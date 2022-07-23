@@ -88,11 +88,15 @@
     opacity: 1;
     visibility: visible;
   }
-
-  &__count {
+  &__count-wrapper {
     margin-left: 15px;
+  }
+  &__count {
     align-self: flex-end;
     transition: all linear 0.3s;
+  }
+  &.show-small &__count-wrapper {
+    margin-left: 0px;
   }
   &.show-small &__count {
     transition: all linear 0.3s;

@@ -2,26 +2,22 @@ import { memo } from "react";
 import "./CategoriesItem.scss";
 
 function CategoriesItem({
-  setListId,
-  todoList,
-  icon,
+  isChekedTasksLength,
   id,
+  setListId,
   name,
   activeClass,
   colorCircle,
+  icon,
 }) {
   const categoriesItemClasses = ["categories__item"];
   if (activeClass) {
     categoriesItemClasses.push(activeClass);
   }
 
-  const allNotCheckedTaks = todoList.filter(
-    (todo) => todo.isChecked === false
-  ).length;
+  const allNotCheckedTaks = isChekedTasksLength(id);
 
-  const allNotCheckedTaksCategory = todoList.filter(
-    (todo) => todo.listId === id && todo.isChecked === false
-  ).length;
+  const allNotCheckedTaksCategory = isChekedTasksLength(id);
 
   const makeActiveItem = () => setListId(id);
 
@@ -35,12 +31,18 @@ function CategoriesItem({
       </div>
 
       {id === "all" ? (
-        allNotCheckedTaks ? (
-          <div className="categories__count">{allNotCheckedTaks}</div>
-        ) : null
-      ) : allNotCheckedTaksCategory ? (
-        <div className="categories__count">{allNotCheckedTaksCategory}</div>
-      ) : null}
+        <div className="categories__count-wrapper">
+          {allNotCheckedTaks ? (
+            <div className="categories__count">{allNotCheckedTaks}</div>
+          ) : null}
+        </div>
+      ) : (
+        <div className="categories__count-wrapper">
+          {allNotCheckedTaksCategory ? (
+            <div className="categories__count">{allNotCheckedTaksCategory}</div>
+          ) : null}{" "}
+        </div>
+      )}
     </div>
   );
 }
