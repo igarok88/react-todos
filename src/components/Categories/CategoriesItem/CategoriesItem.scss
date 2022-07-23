@@ -6,7 +6,7 @@
   &__items {
     padding: 0 5px;
     overflow: auto;
-    justify-content: center;
+    // justify-content: center;
   }
 
   &__item {
@@ -27,7 +27,7 @@
     }
   }
   &.show-small &__item {
-    justify-content: center;
+    // justify-content: center;
     padding: 6px;
     margin: 13px 0px;
     &.active {

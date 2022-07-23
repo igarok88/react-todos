@@ -49,10 +49,7 @@ export default function Sync({
       })
       .catch((error) => {
         console.error(error);
-        readUserData();
-        setTimeout(() => {
-          console.log("время ожидания истекло");
-        }, 10000);
+        syncData();
       });
     return;
   };

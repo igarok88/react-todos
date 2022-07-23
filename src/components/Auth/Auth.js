@@ -11,6 +11,7 @@ import {
 import { MdOutlineLogout, MdOutlineClose } from "react-icons/md";
 import { VscSync } from "react-icons/vsc";
 import { FcGoogle } from "react-icons/fc";
+
 import Sync from "../Auth/Sync/Sync";
 import "./Auth.scss";
 
@@ -43,7 +44,9 @@ export default memo(function Auth({
         setLogin(true);
         setUserData(userInfo);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.error(error);
+      });
   };
   const singOut = () => {
     signOut(auth)

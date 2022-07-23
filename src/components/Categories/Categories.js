@@ -1,8 +1,10 @@
 import { useRef, useEffect } from "react";
 
-import { RiBarChartHorizontalLine } from "react-icons/ri";
+import { Switch, Route, Link } from "react-router-dom";
 
+import { RiBarChartHorizontalLine } from "react-icons/ri";
 import { MdKeyboardArrowRight } from "react-icons/md";
+
 import CategoriesItem from "./CategoriesItem/CategoriesItem";
 import AddCategories from "./AddCategories/AddCategories";
 import { compensateScroll } from "../../func/func";
@@ -30,7 +32,7 @@ export default function Categories({
   }, []);
 
   useEffect(() => {
-    if (document.documentElement.clientWidth < 750) {
+    if (document.documentElement.clientWidth < 550) {
       categoriesRef.current.classList.add("show-small");
     }
   }, [listId]);
@@ -39,8 +41,13 @@ export default function Categories({
     categoriesRef.current.classList.toggle("show-small");
   };
 
+  const categoriesClasses = ["categories"];
+  if (document.documentElement.clientWidth < 630) {
+    categoriesClasses.push("show-small");
+  }
+
   return (
-    <div className="categories" ref={categoriesRef}>
+    <div className={categoriesClasses.join(" ")} ref={categoriesRef}>
       <div className="categories__menu-arrow-btn" onClick={toggleMenu}>
         <MdKeyboardArrowRight />
       </div>
@@ -51,14 +58,16 @@ export default function Categories({
           colors={colors}
         />
         {categoryList && categoryList.length > 1 && (
-          <CategoriesItem
-            todoList={todoList}
-            id={"all"}
-            name={"Все задачи"}
-            setListId={setListId}
-            activeClass={"all" === listId ? "active" : null}
-            icon={<RiBarChartHorizontalLine />}
-          />
+          <Link to="/">
+            <CategoriesItem
+              todoList={todoList}
+              id={"all"}
+              name={"Все задачи"}
+              setListId={setListId}
+              activeClass={"all" === listId ? "active" : null}
+              icon={<RiBarChartHorizontalLine />}
+            />
+          </Link>
         )}
       </div>
       <div className="categories__items" ref={categoriesItemsRef}>
@@ -67,15 +76,17 @@ export default function Categories({
             (color) => color.id === list.colorId
           )[0].name;
           return (
-            <CategoriesItem
-              todoList={todoList}
-              key={list.id}
-              id={list.id}
-              name={list.name}
-              setListId={setListId}
-              activeClass={list.id === listId ? "active" : null}
-              colorCircle={list.color}
-            />
+            <Link to={list.name.toLowerCase()} key={list.id}>
+              <CategoriesItem
+                todoList={todoList}
+                // key={list.id}
+                id={list.id}
+                name={list.name}
+                setListId={setListId}
+                activeClass={list.id === listId ? "active" : null}
+                colorCircle={list.color}
+              />
+            </Link>
           );
         })}
       </div>

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-
 import Todo from "./components/Todo/Todo";
 import Categories from "./components/Categories/Categories";
 import Auth from "./components/Auth/Auth";
