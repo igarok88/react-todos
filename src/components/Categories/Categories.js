@@ -54,7 +54,7 @@ export default function Categories({
       <div className="categories__static-items">
         <AddCategories setCategoryList={setCategoryList} />
         {categoryList && categoryList.length > 1 && (
-          <Link to="/">
+          <Link to="all">
             <CategoriesItem
               isChekedTasksLength={isChekedTasksLength}
               id={"all"}
@@ -72,7 +72,7 @@ export default function Categories({
             (color) => color.id === list.colorId
           )[0].name;
           return (
-            <Link to={list.name.toLowerCase()} key={list.id}>
+            <Link to={`${list.id}`} key={list.id}>
               <CategoriesItem
                 isChekedTasksLength={isChekedTasksLength}
                 // key={list.id}

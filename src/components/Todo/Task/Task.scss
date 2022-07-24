@@ -4,7 +4,7 @@
     margin: 8px 15px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     @media (max-width: 1000px) {
       padding: 5px;
     }
@@ -17,12 +17,16 @@
     background-color: #183588;
     border-radius: 50%;
     margin-right: 15px;
+    margin-top: 4px;
     display: flex;
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
     border: 1px solid transparent;
     transition: all 0.5s ease;
+    @media (max-width: 1000px) {
+      margin-right: 10px;
+    }
     &:hover {
       background-color: lighten($color: #183588, $amount: 20);
       border: 1px solid #eaecf1;
@@ -30,12 +34,18 @@
   }
 
   &__task {
+    text-align: justify;
     color: #eaecf1;
     display: flex;
     align-items: center;
     width: 100%;
     margin: 5px;
+    margin-right: 20px;
+    margin-left: 6px;
     font-size: 16px;
+    @media (max-width: 1000px) {
+      margin-right: 10px;
+    }
   }
   &__task.checked {
     text-decoration: line-through;
@@ -44,6 +54,7 @@
     cursor: pointer;
     color: #183588;
     margin: 5px;
+    font-size: 19px;
     transition: all 0.5s ease;
     &:hover {
       color: lighten($color: #183588, $amount: 70);

@@ -1,50 +1,65 @@
 {
   "lists": [
-    { "id": 1, "name": "Покупки", "colorId": 1, "date": 1 },
-    { "id": 2, "name": "Фронтенд", "colorId": 2, "date": 1 },
-    { "id": 3, "name": "Фильмы", "colorId": 3, "date": 2 },
-    { "id": 4, "name": "Книги", "colorId": 4, "date": 2 },
-    { "id": 5, "name": "Личное", "colorId": 5, "date": 2 },
-    {
-      "id": 6,
-      "name": " Личное Личное Личное ЛичноеЛичное Личное Личное Личное",
-      "colorId": 5,
-      "date": 2
-    }
+    { "id": 1, "name": "How to use?", "colorId": 1, "date": 1 },
+    { "id": 2, "name": "Books", "colorId": 4, "date": 2 },
+    { "id": 3, "name": "Films", "colorId": 3, "date": 2 },
+    { "id": 4, "name": "Shopping", "colorId": 2, "date": 1 },
+    { "id": 5, "name": "Family", "colorId": 5, "date": 2 }
   ],
   "tasks": [
     {
       "id": 1,
       "listId": 1,
-      "description": "Изучить HTML",
-      "isChecked": true,
-      "date": 2
-    },
-    {
-      "id": 2,
-      "listId": 1,
-      "description": "Изучить CSS",
-      "isChecked": true,
+      "description": "Hello. Thank you for using this program. This is a simple to-do list.",
+      "isChecked": false,
       "date": 2
     },
     {
       "id": 3,
-      "listId": 2,
-      "description": "del",
+      "listId": 1,
+      "description": "On the left side of the program is the section in which the categories are located. For example, in one category you write down a shopping list, in another you write down the movies you want to watch, etc.",
       "isChecked": false,
       "date": 1
     },
     {
       "id": 4,
-      "listId": 3,
-      "description": "del",
+      "listId": 1,
+      "description": "To add a category, click the \"Add Category\" button",
       "isChecked": false,
       "date": 1
     },
     {
       "id": 5,
-      "listId": 3,
-      "description": "Изучить React Redux",
+      "listId": 1,
+      "description": "On the right side of the program is a section with a to-do list. Here you can edit the category title by simply clicking on the text or delete it by clicking on the cross. The same goes for the to-do list. The list can be marked as complete.",
+      "isChecked": false,
+      "date": 1
+    },
+    {
+      "id": 2,
+      "listId": 1,
+      "description": "Below there is a field called \"New task\", Enter some text and click the plus to add a task",
+      "isChecked": false,
+      "date": 1
+    },
+    {
+      "id": 6,
+      "listId": 1,
+      "description": "In the lower right corner there is a button to sync your data between different devices. You will need to sign in with your Google account",
+      "isChecked": false,
+      "date": 1
+    },
+    {
+      "id": 7,
+      "listId": 2,
+      "description": "JavaScript: The Definitive Guide Flanagan D.",
+      "isChecked": true,
+      "date": 1
+    },
+    {
+      "id": 8,
+      "listId": 1,
+      "description": "Categories created as an example. you can delete all categories and to-do lists and create your own.",
       "isChecked": false,
       "date": 1
     }

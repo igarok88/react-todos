@@ -42,11 +42,15 @@
   &__category-btns {
     display: flex;
     color: #183588;
+    margin-bottom: 10px;
+    @media (max-width: 1000px) {
+      margin-bottom: 0;
+    }
   }
   &__category-edit {
     cursor: pointer;
     margin: 10px;
-    margin-top: 0px;
+    margin-top: 0;
     transition: all 0.5s ease;
     &:hover {
       color: #eaecf1;

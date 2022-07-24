@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import Todo from "./components/Todo/Todo";
 import Categories from "./components/Categories/Categories";
 import Auth from "./components/Auth/Auth";
@@ -15,6 +15,17 @@ export default function App() {
   const [todoList, setTodoList] = useState(DB.tasks);
   const [deletedTodoList, setDeletedTodoList] = useState([]);
   const [deletedCategoryList, setDeletedCategoryList] = useState([]);
+
+  const setLinkId = () => {
+    if (categoryList && categoryList.length > 0) {
+      categoryList.forEach((list) => {
+        if (String(list.id) === window.location.pathname.slice(1)) {
+          setListId(list.id);
+        }
+      });
+    }
+  };
+  useEffect(setLinkId, []);
 
   const getStateData = () => {
     return {
@@ -141,10 +152,10 @@ export default function App() {
     <div className="App">
       <Categories
         isChekedTasksLength={isChekedTasksLength}
-        listId={listId}
-        setListId={setListId}
         categoryList={categoryList}
         setCategoryList={setCategoryList}
+        listId={listId}
+        setListId={setListId}
       />
       <Todo
         addTask={addTask}

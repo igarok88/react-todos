@@ -20,7 +20,7 @@ export default memo(function AddCategories({ setCategoryList }) {
           <div className="categories__add-icon">
             <MdOutlineClose />
           </div>
-          <div className="categories__add-name">Add Categories</div>
+          <div className="categories__add-name">Add Category</div>
         </div>
       </div>
       {showPopup && (

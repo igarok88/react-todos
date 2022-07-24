@@ -19,7 +19,9 @@ function CategoriesItem({
 
   const allNotCheckedTaksCategory = isChekedTasksLength(id);
 
-  const makeActiveItem = () => setListId(id);
+  const makeActiveItem = () => {
+    setListId(id);
+  };
 
   return (
     <div className={categoriesItemClasses.join(" ")} onClick={makeActiveItem}>
