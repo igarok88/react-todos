@@ -18,6 +18,9 @@ a {
   }
 }
 
+@import url(./colors.scss);
+@import url(./fonts/fonts.scss);
+
 //scrollbar
 /* width */
 ::-webkit-scrollbar {
@@ -36,25 +39,6 @@ a {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #227afe;
-}
-
-@font-face {
-  font-family: "San-Francisco-Display-Regular";
-  src: url("font/SanFranciscoDisplayRegular.woff") format("truetype");
-  font-style: normal;
-  font-weight: normal;
-}
-@font-face {
-  font-family: "Montserrat-Bold";
-  src: url("font/Montserrat-Bold.ttf") format("truetype");
-  font-style: normal;
-  font-weight: normal;
-}
-@font-face {
-  font-family: "Roboto-Regular";
-  src: url("font/Roboto-Regular.ttf") format("truetype");
-  font-style: normal;
-  font-weight: normal;
 }
 
 .App {

@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useLocalStorage } from "./func/hooks";
 import Todo from "./components/Todo/Todo";
 import Categories from "./components/Categories/Categories";
 import Auth from "./components/Auth/Auth";
@@ -11,11 +12,20 @@ import "./App.scss";
 
 export default function App() {
   const [listId, setListId] = useState("all");
-  const [categoryList, setCategoryList] = useState(DB.lists);
-  const [todoList, setTodoList] = useState(DB.tasks);
-  const [deletedTodoList, setDeletedTodoList] = useState([]);
-  const [deletedCategoryList, setDeletedCategoryList] = useState([]);
 
+  const [categoryList, setCategoryList] = useLocalStorage(
+    DB.lists,
+    "categoryList"
+  );
+  const [todoList, setTodoList] = useLocalStorage(DB.tasks, "setTodoList");
+  const [deletedTodoList, setDeletedTodoList] = useLocalStorage(
+    [],
+    "setDeletedTodoList"
+  );
+  const [deletedCategoryList, setDeletedCategoryList] = useLocalStorage(
+    [],
+    "setDeletedCategoryList"
+  );
   const setLinkId = () => {
     if (categoryList && categoryList.length > 0) {
       categoryList.forEach((list) => {
@@ -25,7 +35,7 @@ export default function App() {
       });
     }
   };
-  useEffect(setLinkId, []);
+  useEffect(setLinkId);
 
   const getStateData = () => {
     return {
@@ -132,7 +142,6 @@ export default function App() {
   const addTask = (description, listId) => {
     if (description) {
       setTodoList((todoList) => {
-        console.log(todoList);
         return [
           ...todoList,
           {
@@ -144,7 +153,6 @@ export default function App() {
           },
         ];
       });
-      // setDescription("");
     }
   };
 

@@ -31,23 +31,21 @@ export default function Task({
   }
 
   return (
-    <>
-      <div className="todo__task-wrapper">
-        <div className="todo__checkbox" onClick={checkTask}>
-          {isChecked && <BsCheck2 />}
-        </div>
-        <div
-          id={id}
-          contentEditable
-          suppressContentEditableWarning={true}
-          ref={taskDescription}
-          onBlur={editDescription}
-          className={todoTaskClasses.join(" ")}
-        >
-          {description}
-        </div>
-        <ImCross className="todo__delete-task-btn" onClick={deleteTask} />
+    <div className="todo__task-wrapper">
+      <ImCross className="todo__delete-task-btn" onClick={deleteTask} />
+      <div
+        id={id}
+        contentEditable
+        suppressContentEditableWarning={true}
+        ref={taskDescription}
+        onBlur={editDescription}
+        className={todoTaskClasses.join(" ")}
+      >
+        {description}
       </div>
-    </>
+      <div className="todo__checkbox" onClick={checkTask}>
+        {isChecked && <BsCheck2 />}
+      </div>
+    </div>
   );
 }

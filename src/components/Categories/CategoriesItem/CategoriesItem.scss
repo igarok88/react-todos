@@ -89,14 +89,17 @@
     visibility: visible;
   }
   &__count-wrapper {
-    margin-left: 15px;
+    margin-left: 10px;
+    min-width: 20px;
+  }
+
+  &.show-small &__count-wrapper {
+    margin-left: 0px;
+    min-width: auto;
   }
   &__count {
     align-self: flex-end;
     transition: all linear 0.3s;
-  }
-  &.show-small &__count-wrapper {
-    margin-left: 0px;
   }
   &.show-small &__count {
     transition: all linear 0.3s;

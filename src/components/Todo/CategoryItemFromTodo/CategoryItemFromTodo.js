@@ -1,12 +1,18 @@
 import { useRef } from "react";
 import { VscEdit } from "react-icons/vsc";
 import { ImCross } from "react-icons/im";
+import "./CategoryItemFromTodo.scss";
 
 const CategoryItemFromTodo = ({ deleteCategory, editCategory, category }) => {
   const categoryNameRef = useRef();
 
   const editCategoryName = () => {
     editCategory(categoryNameRef.current);
+  };
+  const blurWithEnter = (e) => {
+    if (e.key === "Enter") {
+      categoryNameRef.current.blur();
+    }
   };
 
   const focusCategoryName = () => {
@@ -25,9 +31,16 @@ const CategoryItemFromTodo = ({ deleteCategory, editCategory, category }) => {
   return (
     <>
       <div className="todo__category-title-wrapper">
+        <div className="todo__category-delete-btn">
+          <ImCross onClick={deleteCategoryName} />
+        </div>
+        <div className="todo__category-edit">
+          <VscEdit onClick={focusCategoryName} />
+        </div>
         <h2
           id={category.id}
           ref={categoryNameRef}
+          onKeyPress={(e) => blurWithEnter(e)}
           onBlur={editCategoryName}
           contentEditable
           suppressContentEditableWarning={true}
@@ -35,16 +48,6 @@ const CategoryItemFromTodo = ({ deleteCategory, editCategory, category }) => {
         >
           {category.name}
         </h2>
-        <div className="todo__category-btns">
-          <VscEdit
-            className="todo__category-edit"
-            onClick={focusCategoryName}
-          />
-          <ImCross
-            className="todo__category-delete-btn"
-            onClick={deleteCategoryName}
-          />
-        </div>
       </div>
     </>
   );

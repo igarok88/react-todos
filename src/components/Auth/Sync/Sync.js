@@ -14,6 +14,7 @@ import { useRef } from "react";
 export default function Sync({ getStateData, userData }) {
   const [syncSuccess, setSyncSuccess] = useState(false);
   const [syncError, setSyncError] = useState(false);
+  const [countError, setCountError] = useState(0);
 
   const [syncAnimation, setSyncAnimation] = useState(false);
   const [timeSyncAnimation, setTimeSyncAnimation] = useState(false);
@@ -55,7 +56,19 @@ export default function Sync({ getStateData, userData }) {
         })
         .catch((error) => {
           console.error(error);
-          syncData();
+          setCountError((prev) => {
+            ++prev;
+            if (prev >= 5) {
+              setSyncAnimation(false);
+              clearTimeout(newCallSignIn);
+              setSyncError(true);
+              return 0;
+            } else {
+              return prev;
+            }
+          });
+
+          const newCallSignIn = setTimeout(readUserData, 10000);
         });
       return;
     };
@@ -88,6 +101,9 @@ export default function Sync({ getStateData, userData }) {
               });
 
               if (dataVerification) {
+                console.log(
+                  "local data and server data are the same. end of sync"
+                );
                 syncDone();
               } else {
                 throw new Error(
@@ -255,7 +271,7 @@ export default function Sync({ getStateData, userData }) {
   };
 
   const syncClasses = ["authentication__sync"];
-  const syncErrMessageClasses = ["authentication__sync-error-message"];
+  const syncErrMessageClasses = ["authentication__error-message"];
 
   if (syncAnimation) {
     syncClasses.push("sync-process");
@@ -281,7 +297,7 @@ export default function Sync({ getStateData, userData }) {
       </div>
       <div ref={syncRef} className={syncClasses.join(" ")}>
         <VscSync
-          className="authentication__auth-icon"
+          className="authentication__auth-icon authentication__auth-icon_sync"
           onClick={syncData}
           title="Sync Data"
         />

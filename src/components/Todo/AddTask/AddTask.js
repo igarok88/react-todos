@@ -1,4 +1,4 @@
-import { useState, memo } from "react";
+import { useState, useRef, memo } from "react";
 import { MdOutlineClose } from "react-icons/md";
 
 import "./AddTask.scss";
@@ -6,23 +6,40 @@ import "./AddTask.scss";
 function AddTask({ listId, addTask }) {
   const [description, setDescription] = useState("");
 
+  const textareaRef = useRef();
+
+  const changeTextarea = (e) => {
+    const textarea = e.target;
+    textarea.style.height = "inherit";
+    textarea.style.height = `${textarea.scrollHeight}px`;
+
+    setDescription(textarea.value);
+  };
+
   const addTaskDesc = () => {
     addTask(description, listId);
     setDescription("");
+    textareaRef.current.style.height = "inherit";
+  };
+  const addTaskDescEnter = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      addTaskDesc();
+    }
   };
 
   return (
-    <div className="todo__input-wrapper">
-      <button className="todo__input-add-task-btn" onClick={addTaskDesc}>
+    <div className="todo__textarea-wrapper">
+      <button className="todo__textarea-add-task-btn" onClick={addTaskDesc}>
         <MdOutlineClose />
       </button>
-      <input
-        className="todo__input"
-        type="text"
+      <textarea
+        ref={textareaRef}
+        rows="1"
+        className="todo__textarea"
         placeholder="New task"
-        onChange={(e) => setDescription(e.target.value)}
+        onChange={(e) => changeTextarea(e)}
         value={description}
-        onKeyPress={(e) => e.key === "Enter" && addTaskDesc()}
+        onKeyUp={(e) => addTaskDescEnter(e)}
       />
     </div>
   );

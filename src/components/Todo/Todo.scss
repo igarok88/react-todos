@@ -2,83 +2,26 @@
   transition: all ease 0.5s;
   // transition: padding 0s;
   width: 100%;
-  padding: 35px 5px 35px 35px;
+  padding: 35px 5px;
   overflow: auto;
   background-color: #3450a1;
   @media (max-width: 1000px) {
     padding: 10px 5px 10px 10px;
   }
 
-  &__category-title-wrapper {
-    font-size: 22px;
-    padding: 15px;
-    margin: 15px;
-    color: #eaecf1;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    h2 {
-      width: 100%;
-      white-space: nowrap; /* Текст не переносится */
-      overflow: hidden; /* Обрезаем всё за пределами блока */
-      text-overflow: ellipsis; /* Добавляем многоточие */
-    }
-    @media (max-width: 1000px) {
-      padding: 5px;
-      margin-top: 0px;
-    }
-  }
-  &__category-title {
-    margin-bottom: 25px;
-    font-size: 32px;
-    font-family: "Montserrat-Bold", serif;
-    @media (max-width: 1000px) {
-      margin-bottom: 10px;
-    }
-    @media (max-width: 600px) {
-      font-size: 26px;
-    }
-  }
-  &__category-btns {
-    display: flex;
-    color: #183588;
-    margin-bottom: 10px;
-    @media (max-width: 1000px) {
-      margin-bottom: 0;
-    }
-  }
-  &__category-edit {
-    cursor: pointer;
-    margin: 10px;
-    margin-top: 0;
-    transition: all 0.5s ease;
-    &:hover {
-      color: #eaecf1;
-    }
-    @media (max-width: 600px) {
-      font-size: 18px;
-    }
-  }
-  &__category-delete-btn {
-    transition: all 0.5s ease;
-    cursor: pointer;
-    &:hover {
-      color: #eaecf1;
-    }
-    @media (max-width: 600px) {
-      font-size: 18px;
-    }
-  }
   &__no-tasks {
     font-size: 40px;
     padding: 15px;
     margin: 15px;
-    margin-top: 35px;
+    margin-top: 12px;
     color: #eaecf1;
     font-family: "Montserrat-Bold", serif;
-    @media (max-width: 550px) {
+    @media (max-width: 1000px) {
+      margin-top: 36px;
+    }
+    @media (max-width: 600px) {
       font-size: 28px;
-      margin-top: 45px;
+      margin-top: 39px;
     }
   }
 }

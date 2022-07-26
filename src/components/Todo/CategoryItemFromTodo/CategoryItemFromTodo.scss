@@ -1,0 +1,77 @@
+.todo {
+  &__category-title-wrapper {
+    font-size: 22px;
+    padding: 15px;
+    margin: 15px;
+    color: #eaecf1;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    h2 {
+      width: 100%;
+      padding-bottom: 4px;
+      white-space: nowrap; /* Текст не переносится */
+      overflow: hidden; /* Обрезаем всё за пределами блока */
+      text-overflow: ellipsis; /* Добавляем многоточие */
+    }
+    @media (max-width: 1000px) {
+      padding: 5px;
+      margin-top: 0px;
+    }
+    @media (max-width: 600px) {
+      margin-bottom: 0px;
+    }
+  }
+  &__category-title {
+    font-size: 32px;
+    font-family: "Montserrat-Bold", serif;
+    border-bottom: 3px solid transparent;
+    transition: all 0.5s ease;
+
+    &:hover {
+      border-bottom: 3px solid #eaecf1;
+    }
+    &:focus {
+      border-bottom: 3px solid #eaecf1;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 26px;
+    }
+  }
+
+  &__category-edit {
+    color: #183588;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: all 0.5s ease;
+    &:hover {
+      color: #eaecf1;
+    }
+    @media (max-width: 600px) {
+      font-size: 18px;
+    }
+  }
+  &__category-edit:hover ~ &__category-title {
+    border-bottom: 3px solid #eaecf1;
+  }
+  &__category-edit:focus ~ &__category-title {
+    border-bottom: 3px solid #eaecf1;
+  }
+
+  &__category-delete-btn {
+    color: #183588;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    &:hover {
+      color: #eaecf1;
+    }
+    @media (max-width: 600px) {
+      font-size: 18px;
+    }
+  }
+  &__category-delete-btn:hover ~ &__category-title {
+    border-bottom: 3px solid #da4747;
+  }
+}

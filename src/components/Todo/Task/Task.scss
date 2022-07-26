@@ -1,8 +1,9 @@
 .todo {
   &__task-wrapper {
     padding: 15px;
-    margin: 8px 15px;
+    margin: 0 12px 0 15px;
     display: flex;
+    flex-direction: row-reverse;
     justify-content: space-between;
     align-items: flex-start;
     @media (max-width: 1000px) {
@@ -34,19 +35,25 @@
   }
 
   &__task {
+    white-space: pre;
+    overflow: hidden;
+    transition: all 0.5s ease;
     text-align: justify;
     color: #eaecf1;
     display: flex;
     align-items: center;
     width: 100%;
-    margin: 5px;
-    margin-right: 20px;
-    margin-left: 6px;
+    padding: 5px;
     font-size: 16px;
-    @media (max-width: 1000px) {
-      margin-right: 10px;
+    border-bottom: 3px solid transparent;
+    &:hover {
+      border-bottom: 3px solid #eaecf1;
+    }
+    &:focus {
+      border-bottom: 3px solid #eaecf1;
     }
   }
+
   &__task.checked {
     text-decoration: line-through;
   }
@@ -54,10 +61,18 @@
     cursor: pointer;
     color: #183588;
     margin: 5px;
+    margin-left: 15px;
     font-size: 19px;
     transition: all 0.5s ease;
     &:hover {
       color: lighten($color: #183588, $amount: 70);
     }
+    @media (max-width: 1000px) {
+      margin-left: 10px;
+    }
+  }
+  &__delete-task-btn:hover + &__task {
+    border-bottom: 3px solid #da4747;
+    // box-shadow: 0px 0px 12px 4px #da4747;
   }
 }

@@ -7,7 +7,7 @@
   padding-bottom: 10px;
   display: flex;
   justify-content: flex-end;
-  width: 210px;
+  width: 220px;
   z-index: 10;
   user-select: none;
 
@@ -25,6 +25,10 @@
     border-radius: 50%;
     background-color: rgb(50, 18, 124);
     z-index: 10;
+    color: rgba(255, 255, 255, 0.555);
+    &:hover {
+      color: #fff;
+    }
   }
   &.show-small &__auth-show-btn {
     margin-left: 12px;
@@ -58,13 +62,22 @@
     bottom: -200%;
     visibility: hidden;
   }
-  &__auth-sign {
+  &__sign,
+  &__auth {
+    color: rgba(255, 255, 255, 0.555);
+    cursor: pointer;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     animation-duration: 0.3s;
     padding-left: 7px;
+  }
+  &__auth {
+    cursor: default;
+  }
+  &__sign:hover &__auth-title {
+    color: #fff;
   }
   .show &__auth-sign {
     bottom: 0;
@@ -74,43 +87,60 @@
   }
 
   &__auth-title {
-    cursor: pointer;
-    // margin-left: -10px;
+    transition: all ease 0.5s;
+    font-size: 18px;
   }
   &__auth-icon {
-    margin: 15px 10px;
+    margin: 12px 6px;
+    margin-right: 10px;
+    padding: 2px;
     // margin-right: 12px;
     display: flex;
     align-items: center;
     width: 20px;
     height: 20px;
+    // cursor: pointer;
+  }
+  &__auth-icon_google {
+    width: 27px;
+    height: 27px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+  }
+  &__auth-icon_google.auth-process {
+    animation: rotate 2s infinite;
+  }
+  &__auth-icon_sync,
+  &__auth-icon_logout {
+    transition: all ease 0.5s;
     cursor: pointer;
+    width: 30px;
+    height: 30px;
+    margin: 0 7px;
+    &:hover {
+      color: #fff;
+    }
   }
-  &__auth-icon--google {
-    width: 21px;
-    height: 21px;
-    background-color: #fff;
-    border-radius: 5px;
-  }
+
   &__sync {
     transition: all ease 2s;
     // position: relative;
   }
-  &__sync-error-message {
+  &__error-message {
     display: none;
     position: absolute;
     z-index: 11;
-    width: 210px;
-    top: -74px;
+    width: 220px;
+    top: -85px;
     left: 0px;
     text-align: center;
     color: red;
     font-weight: bold;
     background-color: #fff;
-    padding: 5px;
+    padding: 10px;
     border-radius: 15px;
   }
-  &__sync-error-message.error {
+  &__error-message.error {
     display: block;
   }
   &__sync.success {
@@ -121,22 +151,22 @@
   }
 
   &__sync.sync-process {
-    animation: syncProcess 2s infinite;
+    animation: rotate 2s infinite;
   }
 
-  @keyframes syncProcess {
+  &__auth-avatar {
+    margin: 7.5px 20px;
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+  }
+
+  @keyframes rotate {
     from {
       transform: rotate(0);
     }
     to {
       transform: rotate(360deg);
     }
-  }
-
-  &__auth-avatar {
-    margin: 0 20px;
-    width: 30px;
-    height: 30px;
-    border-radius: 5px;
   }
 }

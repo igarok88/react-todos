@@ -1,5 +1,4 @@
 import { useRef, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
 
 import { compensateScroll } from "../../func/func";
 import CategoryItemFromTodo from "../Todo/CategoryItemFromTodo/CategoryItemFromTodo";
@@ -76,17 +75,15 @@ export default function Todo({
               })}
               {todoList.map((todo) => {
                 return (
-                  <div key={todo.id}>
-                    {todo.listId === listId && (
-                      <Task
-                        key={todo.id}
-                        editTaskDescription={editTaskDescription}
-                        removeTask={removeTask}
-                        checkedTask={checkedTask}
-                        todo={todo}
-                      />
-                    )}
-                  </div>
+                  todo.listId === listId && (
+                    <Task
+                      key={todo.id}
+                      editTaskDescription={editTaskDescription}
+                      removeTask={removeTask}
+                      checkedTask={checkedTask}
+                      todo={todo}
+                    />
+                  )
                 );
               })}
               <AddTask listId={listId} addTask={addTask} />
