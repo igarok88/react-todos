@@ -22,7 +22,6 @@ export default memo(function Auth({ getStateData }) {
   const [authProcess, setAuthProcess] = useState(false);
   const [authError, setAuthError] = useState(false);
 
-  console.log(countError);
   const [showLogin, setShowLogin] = useState(true);
   const [userData, setUserData] = useState(null);
 

@@ -33,11 +33,12 @@
     }
   }
   &__textarea {
+    font-family: "San-Francisco-Display-Regular";
     word-break: break-word;
     overflow: hidden;
     resize: none;
     transition: all 0.5s ease;
-    font-size: 18px;
+    // font-size: 18px;
     color: #eaecf1;
     display: flex;
     align-items: center;

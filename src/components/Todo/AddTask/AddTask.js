@@ -11,7 +11,7 @@ function AddTask({ listId, addTask }) {
   const changeTextarea = (e) => {
     const textarea = e.target;
     textarea.style.height = "inherit";
-    textarea.style.height = `${textarea.scrollHeight}px`;
+    textarea.style.height = `${textarea.scrollHeight + 3}px`;
 
     setDescription(textarea.value);
   };

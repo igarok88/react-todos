@@ -1,4 +1,5 @@
 import { useState, memo } from "react";
+import { useLocalStorage } from "../../../func/hooks";
 
 import AddCategoriesPopup from "./AddCategoriesPopup/AddCategoriesPopup";
 
@@ -7,7 +8,7 @@ import { MdOutlineClose } from "react-icons/md";
 
 export default memo(function AddCategories({ setCategoryList }) {
   const [showPopup, setShowPopup] = useState(false);
-  const [colorId, setColorId] = useState(1);
+  const [colorId, setColorId] = useLocalStorage(1, "colorId");
 
   const openPopup = () => {
     setShowPopup(true);

@@ -35,7 +35,7 @@
   }
 
   &__task {
-    white-space: pre;
+    white-space: pre-wrap;
     overflow: hidden;
     transition: all 0.5s ease;
     text-align: justify;

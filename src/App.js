@@ -11,7 +11,7 @@ import DB from "./data/db.json";
 import "./App.scss";
 
 export default function App() {
-  const [listId, setListId] = useState("all");
+  const [listId, setListId] = useLocalStorage("all", "listId");
 
   const [categoryList, setCategoryList] = useLocalStorage(
     DB.lists,
