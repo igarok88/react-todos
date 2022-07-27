@@ -20,8 +20,11 @@ export default function Todo({
   const todoListRef = useRef(null);
 
   useEffect(() => {
-    // window.addEventListener("resize", compensateScroll(todoListRef));
+    window.addEventListener("resize", () => {
+      compensateScroll(todoListRef);
+    });
   }, []);
+
   useEffect(() => {
     compensateScroll(todoListRef);
   }, [listId]);

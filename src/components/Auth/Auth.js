@@ -3,7 +3,7 @@ import { useState, useRef, memo } from "react";
 import { auth } from "../../firebase/firebaseConfig";
 import {
   signInWithPopup,
-  signInWithRedirect,
+  // signInWithRedirect,
   GoogleAuthProvider,
   signOut,
 } from "firebase/auth";
@@ -18,7 +18,10 @@ export default memo(function Auth({ getStateData }) {
   const authSyncWrapperRef = useRef(null);
 
   const [login, setLogin] = useState(false);
-  const [countError, setCountError] = useState(0);
+
+  const countState = useState(0);
+  const setCountError = countState[1];
+
   const [authProcess, setAuthProcess] = useState(false);
   const [authError, setAuthError] = useState(false);
 
@@ -30,7 +33,6 @@ export default memo(function Auth({ getStateData }) {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((response) => {
-        console.log(response);
         const userInfo = {
           img: response.user.photoURL,
           uid: response.user.uid,
@@ -61,7 +63,6 @@ export default memo(function Auth({ getStateData }) {
   const singOut = () => {
     signOut(auth)
       .then(() => {
-        console.log("sign out");
         setLogin(false);
       })
       .catch((error) => {
@@ -91,7 +92,6 @@ export default memo(function Auth({ getStateData }) {
     googleIconClasses.push("auth-process");
   }
   if (authError) {
-    // syncClasses.push("error");
     authErrMessageClasses.push("error");
     setTimeout(() => {
       setAuthError(false);
@@ -126,9 +126,9 @@ export default memo(function Auth({ getStateData }) {
             <img
               className={googleIconClasses.join(" ")}
               src="/img/google.svg"
+              alt="signin"
             />
             <div className="authentication__auth-title">Sign in for sync</div>
-            {/* <MdOutlineLogin className="authentication__auth-icon" /> */}
           </div>
         )}
       </div>{" "}

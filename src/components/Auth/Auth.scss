@@ -7,9 +7,16 @@
   padding-bottom: 10px;
   display: flex;
   justify-content: flex-end;
-  width: 220px;
+  width: auto;
   z-index: 10;
   user-select: none;
+  &.hide {
+    width: auto;
+    animation: hideWidth 0.5s;
+  }
+  &.show {
+    width: 220px;
+  }
 
   &__auth-show-btn {
     transition: all ease 0.5s;
@@ -33,10 +40,10 @@
   &.show-small &__auth-show-btn {
     margin-left: 12px;
   }
-  .show &__auth-show-btn {
+  &.show &__auth-show-btn {
     transform: rotate(0);
   }
-  .hide &__auth-show-btn {
+  &.hide &__auth-show-btn {
     transform: rotate(-180deg);
   }
 
@@ -94,16 +101,14 @@
     margin: 12px 6px;
     margin-right: 10px;
     padding: 2px;
-    // margin-right: 12px;
     display: flex;
     align-items: center;
     width: 20px;
     height: 20px;
-    // cursor: pointer;
   }
   &__auth-icon_google {
-    width: 27px;
-    height: 27px;
+    width: 26px;
+    height: 26px;
     background-color: rgb(255, 255, 255);
     border-radius: 50%;
   }
@@ -124,7 +129,6 @@
 
   &__sync {
     transition: all ease 2s;
-    // position: relative;
   }
   &__error-message {
     display: none;
@@ -160,7 +164,17 @@
     height: 35px;
     border-radius: 5px;
   }
-
+  @keyframes hideWidth {
+    0% {
+      width: 220px;
+    }
+    99% {
+      width: 220px;
+    }
+    100% {
+      width: auto;
+    }
+  }
   @keyframes rotate {
     from {
       transform: rotate(0);

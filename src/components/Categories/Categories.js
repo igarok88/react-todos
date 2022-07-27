@@ -1,7 +1,5 @@
 import { useRef, useEffect } from "react";
 
-import { Switch, Route, Link } from "react-router-dom";
-
 import { RiBarChartHorizontalLine } from "react-icons/ri";
 import { MdKeyboardArrowRight } from "react-icons/md";
 
@@ -54,16 +52,14 @@ export default function Categories({
       <div className="categories__static-items">
         <AddCategories setCategoryList={setCategoryList} />
         {categoryList && categoryList.length > 1 && (
-          <Link to="all">
-            <CategoriesItem
-              isChekedTasksLength={isChekedTasksLength}
-              id={"all"}
-              setListId={setListId}
-              name={"Все задачи"}
-              activeClass={"all" === listId ? "active" : null}
-              icon={<RiBarChartHorizontalLine />}
-            />
-          </Link>
+          <CategoriesItem
+            isChekedTasksLength={isChekedTasksLength}
+            id={"all"}
+            setListId={setListId}
+            name={"Все задачи"}
+            activeClass={"all" === listId ? "active" : null}
+            icon={<RiBarChartHorizontalLine />}
+          />
         )}
       </div>
       <div className="categories__items" ref={categoriesItemsRef}>
@@ -72,17 +68,15 @@ export default function Categories({
             (color) => color.id === list.colorId
           )[0].name;
           return (
-            <Link to={`${list.id}`} key={list.id}>
-              <CategoriesItem
-                isChekedTasksLength={isChekedTasksLength}
-                // key={list.id}
-                id={list.id}
-                setListId={setListId}
-                name={list.name}
-                activeClass={list.id === listId ? "active" : null}
-                colorCircle={list.color}
-              />
-            </Link>
+            <CategoriesItem
+              isChekedTasksLength={isChekedTasksLength}
+              key={list.id}
+              id={list.id}
+              setListId={setListId}
+              name={list.name}
+              activeClass={list.id === listId ? "active" : null}
+              colorCircle={list.color}
+            />
           );
         })}
       </div>

@@ -23,12 +23,10 @@ export const isEqual = (object1 = {}, object2 = {}) => {
 };
 
 export const getScrollWidth = () => {
-  //получаем ширину скроллбара
   const div = document.createElement("div");
   div.style.overflowY = "scroll";
   div.style.width = "50px";
   div.style.height = "50px";
-  // мы должны вставить элемент в документ, иначе размеры будут равны 0
   document.body.append(div);
   const scrollWidth = div.offsetWidth - div.clientWidth;
   div.remove();
@@ -49,7 +47,6 @@ export const compensateScroll = (refElement) => {
 };
 
 export const timeForAnimation = (leadTime) => {
-  //this function counts how much time is left before the timing animation completes. animation run time 2 seconds
   let timeAnimation = 2000;
   while (leadTime > timeAnimation) {
     timeAnimation = timeAnimation + 2000;

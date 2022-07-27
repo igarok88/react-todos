@@ -14,7 +14,9 @@ import { useRef } from "react";
 export default function Sync({ getStateData, userData }) {
   const [syncSuccess, setSyncSuccess] = useState(false);
   const [syncError, setSyncError] = useState(false);
-  const [countError, setCountError] = useState(0);
+
+  const countState = useState(0);
+  const setCountError = countState[1];
 
   const [syncAnimation, setSyncAnimation] = useState(false);
   const [timeSyncAnimation, setTimeSyncAnimation] = useState(false);
@@ -22,8 +24,6 @@ export default function Sync({ getStateData, userData }) {
   const syncRef = useRef(null);
 
   const syncData = () => {
-    console.log("start sync");
-
     const stateData = getStateData();
 
     const {
@@ -45,7 +45,6 @@ export default function Sync({ getStateData, userData }) {
             const serverData = snapshot.val();
             getServerData(serverData);
           } else {
-            console.log("No data available");
             getServerData({
               todoList: [],
               categoryList: [],
@@ -86,11 +85,8 @@ export default function Sync({ getStateData, userData }) {
         deletedCategoryList,
       })
         .then(() => {
-          console.log("data validation");
           get(child(ref(db), userData.uid))
             .then((snapshot) => {
-              console.log("data writed", snapshot.val());
-
               const server = ifEmptyServerData(snapshot.val());
 
               const dataVerification = isEqual(server, {
@@ -101,9 +97,6 @@ export default function Sync({ getStateData, userData }) {
               });
 
               if (dataVerification) {
-                console.log(
-                  "local data and server data are the same. end of sync"
-                );
                 syncDone();
               } else {
                 throw new Error(
@@ -125,13 +118,8 @@ export default function Sync({ getStateData, userData }) {
 
     const getServerData = (server) => {
       const compareServerAndLocalData = (serverData, local) => {
-        console.log("serverData", serverData);
-        console.log("local", local);
-
         if (isEqual(serverData, local)) {
           syncDone();
-
-          console.log("isEqual(serverData, local)", isEqual(serverData, local));
 
           return;
         }
@@ -208,7 +196,6 @@ export default function Sync({ getStateData, userData }) {
           localCategoryList
         );
 
-        //handler list and del list
         const syncListAndDelList = (concatData, deletedTodoList) => {
           const concatDataCopy = concatData.concat();
           concatData.forEach((item, index) => {
@@ -219,10 +206,6 @@ export default function Sync({ getStateData, userData }) {
             });
           });
           const finalData = concatDataCopy.filter((el) => el !== null);
-
-          // finalData.sort(function (a, b) {
-          //   return a.date - b.date;
-          // });
 
           return finalData;
         };

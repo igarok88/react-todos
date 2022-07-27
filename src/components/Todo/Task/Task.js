@@ -1,4 +1,4 @@
-import { useRef, memo } from "react";
+import { useRef } from "react";
 
 import { ImCross } from "react-icons/im";
 import { BsCheck2 } from "react-icons/bs";

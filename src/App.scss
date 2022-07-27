@@ -21,27 +21,22 @@ a {
 @import url(./colors.scss);
 @import url(./fonts/fonts.scss);
 
-//scrollbar
-/* width */
 ::-webkit-scrollbar {
   width: 5px;
 }
-/* Track */
 ::-webkit-scrollbar-track {
   background: transparent;
 }
-/* Handle */
 ::-webkit-scrollbar-thumb {
   background: lighten($color: #227afe, $amount: 10);
 
   border-radius: 10px;
 }
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #227afe;
 }
 
-.App {
+.app {
   font-family: "San-Francisco-Display-Regular";
   display: flex;
   justify-content: center;
@@ -49,8 +44,6 @@ a {
   width: 100%;
   max-width: 1200px;
   margin: auto;
-  // margin: 20px;
-  // border-radius: 20px;
   overflow: hidden;
   position: relative;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);

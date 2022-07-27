@@ -6,7 +6,6 @@
   &__items {
     padding: 0 5px;
     overflow: auto;
-    // justify-content: center;
   }
 
   &__item {
@@ -27,7 +26,6 @@
     }
   }
   &.show-small &__item {
-    // justify-content: center;
     padding: 6px;
     margin: 13px 0px;
     &.active {
@@ -69,9 +67,9 @@
     width: 150px;
     font-size: 15px;
     font-family: "Roboto-Regular";
-    white-space: nowrap; /* Текст не переносится */
-    overflow: hidden; /* Обрезаем всё за пределами блока */
-    text-overflow: ellipsis; /* Добавляем многоточие */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   &.show-small &__name {
     transition: all linear 0.3s;

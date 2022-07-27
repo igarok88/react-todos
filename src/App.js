@@ -1,4 +1,3 @@
-import { useState, useRef, useEffect } from "react";
 import { useLocalStorage } from "./func/hooks";
 import Todo from "./components/Todo/Todo";
 import Categories from "./components/Categories/Categories";
@@ -26,16 +25,6 @@ export default function App() {
     [],
     "setDeletedCategoryList"
   );
-  const setLinkId = () => {
-    if (categoryList && categoryList.length > 0) {
-      categoryList.forEach((list) => {
-        if (String(list.id) === window.location.pathname.slice(1)) {
-          setListId(list.id);
-        }
-      });
-    }
-  };
-  useEffect(setLinkId);
 
   const getStateData = () => {
     return {
@@ -157,7 +146,7 @@ export default function App() {
   };
 
   return (
-    <div className="App">
+    <div className="app">
       <Categories
         isChekedTasksLength={isChekedTasksLength}
         categoryList={categoryList}
