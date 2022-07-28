@@ -87,6 +87,8 @@
     visibility: visible;
   }
   &__count-wrapper {
+    display: flex;
+    justify-content: flex-end;
     margin-left: 10px;
     min-width: 20px;
   }

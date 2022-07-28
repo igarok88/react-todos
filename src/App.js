@@ -75,7 +75,11 @@ export default function App() {
     const copy = JSON.parse(JSON.stringify(categoryList));
     copy.map((category) => {
       if (category.id === +categoryDomElement.id) {
-        category.name = categoryDomElement.innerText;
+        if (categoryDomElement.innerText.trim()) {
+          category.name = categoryDomElement.innerText;
+        } else {
+          category.name = "Enter category name";
+        }
       }
       return category;
     });
@@ -103,21 +107,27 @@ export default function App() {
   const editTaskDescription = (taskDomElement, id) => {
     const copy = JSON.parse(JSON.stringify(todoList));
 
-    copy.map((todo) => {
+    copy.map((todo, index) => {
       if (todo.id === id) {
-        todo.description = taskDomElement.innerText;
+        if (taskDomElement.innerText.trim()) {
+          todo.description = taskDomElement.innerText;
+        } else {
+          copy[index].needRemoved = true;
+        }
       }
       return todo;
     });
 
-    if (!isEqual(todoList, copy)) {
+    const newCopy = copy.filter((todo) => !todo.needRemoved);
+
+    if (!isEqual(todoList, newCopy)) {
       copy.map((todo) => {
         if (todo.id === id) {
           todo.date = +new Date();
         }
         return todo;
       });
-      setTodoList(copy);
+      setTodoList(newCopy);
     }
   };
 
@@ -129,7 +139,8 @@ export default function App() {
   };
 
   const addTask = (description, listId) => {
-    if (description) {
+    if (description.trim()) {
+      console.log(description);
       setTodoList((todoList) => {
         return [
           ...todoList,
