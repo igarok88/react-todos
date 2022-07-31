@@ -1,9 +1,10 @@
-import { useState, useRef, memo } from "react";
-
+import { useState, useEffect, useRef, memo } from "react";
+import { useLocalStorage } from "../../func/hooks";
 import { auth } from "../../firebase/firebaseConfig";
 import {
-  signInWithPopup,
-  // signInWithRedirect,
+  // signInWithPopup,
+  signInWithRedirect,
+  // getRedirectResult,
   GoogleAuthProvider,
   signOut,
 } from "firebase/auth";
@@ -15,54 +16,39 @@ import Sync from "../Auth/Sync/Sync";
 import "./Auth.scss";
 
 export default memo(function Auth({ getStateData }) {
-  const authSyncWrapperRef = useRef(null);
-
   const [login, setLogin] = useState(false);
-
-  const countState = useState(0);
-  const setCountError = countState[1];
+  console.log("login", login);
 
   const [authProcess, setAuthProcess] = useState(false);
   const [authError, setAuthError] = useState(false);
 
-  const [showLogin, setShowLogin] = useState(true);
-  const [userData, setUserData] = useState(null);
+  const [showLogin, setShowLogin] = useLocalStorage(true);
+  console.log("showLogin", showLogin);
+
+  const authResponseRef = useRef(null);
 
   const signInWithGoogle = () => {
     setAuthProcess(true);
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
-      .then((response) => {
-        const userInfo = {
-          img: response.user.photoURL,
-          uid: response.user.uid,
+    signInWithRedirect(auth, provider);
+  };
+  useEffect(() => {
+    auth.onAuthStateChanged((response) => {
+      if (response) {
+        console.log(response);
+        authResponseRef.current = {
+          displayName: response.displayName,
+          uid: response.uid,
         };
         setLogin(true);
-        setAuthProcess(false);
+      }
+    });
+  }, []);
 
-        setUserData(userInfo);
-      })
-      .catch((error) => {
-        console.error(error);
-
-        setCountError((prev) => {
-          ++prev;
-          if (prev >= 5) {
-            setAuthProcess(false);
-            clearTimeout(newCallSignIn);
-            setAuthError(true);
-            return 0;
-          } else {
-            return prev;
-          }
-        });
-
-        const newCallSignIn = setTimeout(signInWithGoogle, 10000);
-      });
-  };
   const singOut = () => {
     signOut(auth)
       .then(() => {
+        authResponseRef.current = null;
         setLogin(false);
       })
       .catch((error) => {
@@ -71,17 +57,15 @@ export default memo(function Auth({ getStateData }) {
   };
   const toggleShowLogin = () => {
     setShowLogin(!showLogin);
-
-    const authSyncWrapper = authSyncWrapperRef.current;
-
-    if (showLogin) {
-      authSyncWrapper.classList.remove("hide");
-      authSyncWrapper.classList.add("show");
-    } else {
-      authSyncWrapper.classList.remove("show");
-      authSyncWrapper.classList.add("hide");
-    }
   };
+
+  const authenticationClasses = ["authentication"];
+
+  if (showLogin) {
+    authenticationClasses.push("show");
+  } else {
+    authenticationClasses.push("hide");
+  }
 
   const googleIconClasses = [
     "authentication__auth-icon",
@@ -99,21 +83,22 @@ export default memo(function Auth({ getStateData }) {
   }
 
   return (
-    <div className="authentication" ref={authSyncWrapperRef}>
+    <div className={authenticationClasses.join(" ")}>
       <div className={authErrMessageClasses.join(" ")}>
         Auth failed, please check your internet connection or try again later
       </div>
       <div className="authentication__auth-sync">
-        {login ? (
+        {authResponseRef.current ? (
           <div className="authentication__auth">
-            <Sync getStateData={getStateData} userData={userData} />
-            {userData && (
-              <img
-                className="authentication__auth-avatar"
-                src={userData.img}
-                alt="avatar"
-              />
-            )}
+            <Sync
+              getStateData={getStateData}
+              userData={authResponseRef.current}
+            />
+
+            <div className="authentication__auth-avatar">
+              {" "}
+              {authResponseRef.current.displayName[0]}
+            </div>
 
             <MdOutlineLogout
               title="Log out"
@@ -125,8 +110,8 @@ export default memo(function Auth({ getStateData }) {
           <div className="authentication__sign" onClick={signInWithGoogle}>
             <img
               className={googleIconClasses.join(" ")}
-              src="/img/google.svg"
-              alt="signin"
+              src="img/google.png"
+              alt=""
             />
             <div className="authentication__auth-title">Sign in for sync</div>
           </div>
@@ -137,14 +122,14 @@ export default memo(function Auth({ getStateData }) {
           className="authentication__auth-show-btn"
           onClick={toggleShowLogin}
         >
-          <VscSync />
+          <MdOutlineClose />
         </div>
       ) : (
         <div
           className="authentication__auth-show-btn"
           onClick={toggleShowLogin}
         >
-          <MdOutlineClose />
+          <VscSync />
         </div>
       )}
     </div>

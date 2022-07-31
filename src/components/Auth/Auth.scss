@@ -105,6 +105,9 @@
     align-items: center;
     width: 20px;
     height: 20px;
+    &:hover {
+      color: #fff;
+    }
   }
   &__auth-icon_google {
     width: 26px;
@@ -122,9 +125,6 @@
     width: 30px;
     height: 30px;
     margin: 0 7px;
-    &:hover {
-      color: #fff;
-    }
   }
 
   &__sync {
@@ -147,10 +147,10 @@
   &__error-message.error {
     display: block;
   }
-  &__sync.success {
+  &__sync.success &__auth-icon_sync {
     color: rgb(88, 184, 88);
   }
-  &__sync.error {
+  &__sync.error &__auth-icon_sync {
     color: rgb(255, 38, 0);
   }
 
@@ -159,9 +159,14 @@
   }
 
   &__auth-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
     margin: 7.5px 20px;
     width: 35px;
     height: 35px;
+    border: 2px solid rgba(255, 255, 255, 0.555);
     border-radius: 5px;
   }
   @keyframes hideWidth {

@@ -106,13 +106,13 @@ export default function App() {
 
   const editTaskDescription = (taskDomElement, id) => {
     const copy = JSON.parse(JSON.stringify(todoList));
-
     copy.map((todo, index) => {
       if (todo.id === id) {
         if (taskDomElement.innerText.trim()) {
           todo.description = taskDomElement.innerText;
         } else {
           copy[index].needRemoved = true;
+          setDeletedTodoList([...deletedTodoList, todo.id]);
         }
       }
       return todo;
@@ -140,7 +140,6 @@ export default function App() {
 
   const addTask = (description, listId) => {
     if (description.trim()) {
-      console.log(description);
       setTodoList((todoList) => {
         return [
           ...todoList,
