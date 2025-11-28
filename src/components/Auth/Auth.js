@@ -30,6 +30,11 @@ export default memo(function Auth({ getStateData }) {
   const signInWithGoogle = () => {
     setAuthProcess(true);
     const provider = new GoogleAuthProvider();
+
+    provider.setCustomParameters({
+      prompt: "select_account",
+    });
+
     signInWithRedirect(auth, provider);
   };
   useEffect(() => {

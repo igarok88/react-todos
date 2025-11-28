@@ -94,7 +94,7 @@ export default function Todo({
           )}
         </>
       ) : (
-        <h2 className="todo__no-tasks">Задачи отсутствуют</h2>
+        <h2 className="todo__no-tasks">There are no tasks</h2>
       )}{" "}
     </div>
   );

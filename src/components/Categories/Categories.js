@@ -56,7 +56,7 @@ export default function Categories({
             isChekedTasksLength={isChekedTasksLength}
             id={"all"}
             setListId={setListId}
-            name={"Все задачи"}
+            name={"All tasks"}
             activeClass={"all" === listId ? "active" : null}
             icon={<RiBarChartHorizontalLine />}
           />
