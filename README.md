@@ -66,6 +66,10 @@ If you want to run the project locally:
     npm start
     ```
 
+## 📄 License
+
+This project is licensed under the MIT License. You are free to use, modify, and distribute this code.
+
 ## 👤 Author
 
 **Ihor Shchupliak**
