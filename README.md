@@ -55,7 +55,7 @@ If you want to run the project locally:
 
 1.  Clone the repository:
     ```bash
-    git clone [https://github.com/igarok88/EasyTask-React.git](https://github.com/igarok88/EasyTask-React.git)
+    git clone https://github.com/igarok88/EasyTask-React.git
     ```
 2.  Install dependencies:
     ```bash
